@@ -5,17 +5,24 @@
  */
 package view;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+import model.Server;
+
 /**
  *
  * @author david
  */
 public class Ghost {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String args[]) {
+        Socket client = null;
+        DataInputStream input = null;
+        DataOutputStream output = null;
+        
+        Server server = new Server(client, input, output);
+        server.start();
     }
     
 }
