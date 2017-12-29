@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class Server extends GlobalThread{
 
     private ServerSocket server = null;
-    
-    public Server(Socket client) {
-        super(client);
+       
+    public Server() {
+        super();
         try {                   
             this.server = new ServerSocket(Registry.serverPort);
         } catch (IOException ex) {

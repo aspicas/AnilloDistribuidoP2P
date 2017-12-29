@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class ServerThread extends GlobalThread {
     
     private DataInputStream input;
-    private DataOutputStream output;
+    private DataOutputStream output;    
     
     public ServerThread(Socket client) {
         super(client);

@@ -13,7 +13,11 @@ import java.net.Socket;
  */
 public abstract class GlobalThread extends Thread{
     protected Socket client;
-   
+
+    public GlobalThread() {
+        this.client = null;
+    }
+    
     public GlobalThread(Socket client) {
         this.client = client;
     }

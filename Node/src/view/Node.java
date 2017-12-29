@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+import model.Server;
+
 /**
  *
  * @author david
@@ -15,7 +20,10 @@ public class Node {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Server server = new Server();
+        server.start();
+        
+        
     }
     
 }

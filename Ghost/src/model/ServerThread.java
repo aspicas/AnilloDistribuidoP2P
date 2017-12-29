@@ -24,7 +24,7 @@ public class ServerThread extends GlobalThread{
     }
     
     public void defineRing(){
-        
+        System.out.print("Entra");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ServerThread extends GlobalThread{
 
     @Override
     public void run() {
-        
+        defineRing();
     }
     
 }
