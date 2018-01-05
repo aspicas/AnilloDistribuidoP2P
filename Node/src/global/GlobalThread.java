@@ -5,7 +5,12 @@
  */
 package global;
 
+import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Server;
+import model.ServerThread;
 
 /**
  *
@@ -22,7 +27,15 @@ public abstract class GlobalThread extends Thread{
         this.client = client;
     }
     
-    public abstract void disconnet();
+    public void disconnet(){
+        try{
+            this.client.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @Override
     public abstract void run();

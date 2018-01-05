@@ -28,17 +28,6 @@ public class ServerThread extends GlobalThread{
     }
 
     @Override
-    public void disconnet() {
-        try {
-            super.client.close();
-        } catch (IOException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
     public void run() {
         defineRing();
     }
