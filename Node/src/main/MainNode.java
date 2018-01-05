@@ -7,11 +7,11 @@ package main;
  */
 
 
-import comunication.Client;
+import communication.Client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import comunication.Server;
+import communication.Server;
 
 /**
  *

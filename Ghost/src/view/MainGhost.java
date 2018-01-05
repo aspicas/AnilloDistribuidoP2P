@@ -8,7 +8,7 @@ package view;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import comunication.Server;
+import communication.Server;
 
 /**
  *
