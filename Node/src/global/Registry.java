@@ -5,15 +5,17 @@
  */
 package global;
 
+import controller.NodeController;
+import model.Node;
+import view.NodeView;
+
 /**
  *
  * @author david
  */
 public class Registry {
     public static String ghost = "192.168.1.1";
-    public static String predecessor = "";
-    public static String sucessor = "";
-    public static int clientPort = 2001;
-    public static int serverPort = 2000;
-    public static String ip = "192.168.1.1";
+    public static int port = 2000;
+    public static NodeController nodeController = new NodeController(new Node("localhost"), new NodeView());
+    public static String encrypted = "SHA1";
 }

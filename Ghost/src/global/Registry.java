@@ -12,6 +12,6 @@ package global;
 public class Registry {
     public static String lastConnection = "";
     public static String address = "192.168.1.1";
-    public static int serverPort = 0;
-    public static int clientPort = 0;
+    public static int port = 0;
+    public static String encrypted = "SHA1";
 }

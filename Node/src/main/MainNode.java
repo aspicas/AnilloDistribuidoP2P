@@ -1,28 +1,30 @@
+package main;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
-import model.Server;
+import comunication.Server;
 
 /**
  *
  * @author david
  */
-public class Ghost {
+public class MainNode {
 
-    public static void main(String args[]) {
-        Socket client = null;
-        DataInputStream input = null;
-        DataOutputStream output = null;
-        
-        Server server = new Server(client, input, output);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Server server = new Server();
         server.start();
+        
+        
     }
-    
 }

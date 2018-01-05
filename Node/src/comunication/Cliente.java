@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package comunication;
 
 import global.Registry;
 import java.io.DataInputStream;
@@ -24,7 +24,7 @@ public class Cliente {
 
     public Cliente() {
         try {
-            this.client = new Socket(Registry.ip, Registry.clientPort);
+            this.client = new Socket(Registry.nodeController.getNodeAddress(), Registry.port);
             this.input = new DataInputStream(client.getInputStream());
             this.output = new DataOutputStream(client.getOutputStream());
         } catch (IOException ex) {

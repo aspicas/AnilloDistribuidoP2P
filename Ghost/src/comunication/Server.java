@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package comunication;
 
 import global.GlobalThread;
 import global.Registry;
@@ -20,14 +20,14 @@ import java.util.logging.Logger;
  * @author david
  */
 public class Server extends GlobalThread {
-    private int port = Registry.serverPort;
+    private int port = Registry.port;
     private ServerSocket server = null;
     
     public Server(Socket client, DataInputStream input, DataOutputStream output) {
         super(client, input, output);
         
         try {
-            this.server = new ServerSocket(Registry.serverPort);
+            this.server = new ServerSocket(Registry.port);
             super.client = server.accept();
             super.input = new DataInputStream(super.client.getInputStream());
             super.output = new DataOutputStream(super.client.getOutputStream());

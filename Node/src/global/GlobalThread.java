@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Server;
-import model.ServerThread;
+import comunication.Server;
+import comunication.ServerThread;
 
 /**
  *

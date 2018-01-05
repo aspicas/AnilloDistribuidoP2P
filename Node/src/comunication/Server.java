@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package comunication;
 
 import global.GlobalThread;
 import global.Registry;
@@ -24,7 +24,7 @@ public class Server extends GlobalThread{
     public Server() {
         super();
         try {                   
-            this.server = new ServerSocket(Registry.serverPort);
+            this.server = new ServerSocket(Registry.port);
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
