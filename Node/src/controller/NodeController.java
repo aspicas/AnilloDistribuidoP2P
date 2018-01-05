@@ -44,6 +44,10 @@ public class NodeController {
         return null;
     }
     
+    public String nodeToString(){
+        return node.toString();
+    }
+    
     public void showNode(){
         nodeView.showNode(node.getNodeId(), node.getAddress(), node.getSuccessor(), node.getPredecessor());
     }

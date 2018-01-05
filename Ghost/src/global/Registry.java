@@ -14,4 +14,6 @@ public class Registry {
     public static String address = "192.168.1.1";
     public static int port = 0;
     public static String encrypted = "SHA1";
+    public static String startCommunication = "START";
+    public static String endCommunication = "FINISH";
 }

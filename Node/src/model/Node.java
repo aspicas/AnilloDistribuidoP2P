@@ -60,5 +60,11 @@ public class Node {
 
     public void setPredecessor(String predecessor) {
         this.predecessor = predecessor;
-    }   
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" + "nodeId=" + nodeId + ", address=" + address + ", successor=" + successor + ", predecessor=" + predecessor + '}';
+    }
+    
 }

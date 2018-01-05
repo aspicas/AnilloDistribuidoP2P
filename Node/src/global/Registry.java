@@ -18,4 +18,6 @@ public class Registry {
     public static int port = 2000;
     public static NodeController nodeController = new NodeController(new Node("localhost"), new NodeView());
     public static String encrypted = "SHA1";
+    public static String startCommunication = "START";
+    public static String endCommunication = "FINISH";
 }
