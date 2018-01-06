@@ -44,20 +44,24 @@ public class Client {
     
     public void defineRing(){
         try {
+            String response = "";
+            
             //establish connection
             output.writeUTF(Registry.startCommunication);
-            String response = input.readUTF();
-            System.out.print("response: " + response);
+            response = input.readUTF();
+            System.out.println("response: " + response);
             switch (response) {
-                case Registry.startCommunication:                     
-                    output.writeUTF(Registry.startCommunication);
+                case Registry.startCommunication:          
+                    System.out.println("Entro");
+                    
                     break;
                 default:
-                    System.out.println("Invalid request");
+                    System.out.println("Invalid response");
                     output.writeUTF(Registry.endCommunication);
                     break;
             }            
             disconnet();
+            
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }

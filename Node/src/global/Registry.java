@@ -16,7 +16,7 @@ import view.NodeView;
 public class Registry {
     public static final String ghost = "192.168.1.101";
     public static final int port = 2000;
-    public static NodeController nodeController = new NodeController(new Node("192.168.1.101"), new NodeView());
+    public static NodeController nodeController = new NodeController(new Node("192.168.1.102"), new NodeView());
     public static final String encrypted = "SHA1";
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
