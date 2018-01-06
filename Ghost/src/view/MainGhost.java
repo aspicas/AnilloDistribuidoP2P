@@ -17,11 +17,8 @@ import communication.Server;
 public class MainGhost {
 
     public static void main(String args[]) {
-        Socket client = null;
-        DataInputStream input = null;
-        DataOutputStream output = null;
-        
-        Server server = new Server(client, input, output);
+        System.out.println("Start");
+        Server server = new Server();
         server.start();
     }
     

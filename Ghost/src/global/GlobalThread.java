@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import communication.Server;
 import communication.ServerThread;
+import java.net.ServerSocket;
 
 /**
  *
@@ -23,10 +24,20 @@ public abstract class GlobalThread extends Thread{
     protected DataInputStream input;
     protected DataOutputStream output;
 
-    public GlobalThread(Socket client, DataInputStream input, DataOutputStream output) {
-        this.client = client;
-        this.input = input;
-        this.output = output;
+    public GlobalThread() {
+        this.client = null;
+        this.input = null;
+        this.output = null;
+    } 
+    
+    public GlobalThread(Socket client) {
+        try {
+            this.client = client;
+            this.input = new DataInputStream(client.getInputStream());
+            this.output = new DataOutputStream(client.getOutputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(GlobalThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
     
     public void disconnet(){

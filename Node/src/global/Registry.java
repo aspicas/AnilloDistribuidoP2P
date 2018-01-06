@@ -14,10 +14,10 @@ import view.NodeView;
  * @author david
  */
 public class Registry {
-    public static String ghost = "192.168.1.1";
-    public static int port = 2000;
-    public static NodeController nodeController = new NodeController(new Node("localhost"), new NodeView());
-    public static String encrypted = "SHA1";
-    public static String startCommunication = "START";
-    public static String endCommunication = "FINISH";
+    public static final String ghost = "192.168.1.101";
+    public static final int port = 2000;
+    public static NodeController nodeController = new NodeController(new Node("192.168.1.101"), new NodeView());
+    public static final String encrypted = "SHA1";
+    public static final String startCommunication = "START";
+    public static final String endCommunication = "FINISH";
 }

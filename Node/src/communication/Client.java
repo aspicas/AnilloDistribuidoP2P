@@ -24,7 +24,7 @@ public class Client {
 
     public Client() {
         try {
-            this.client = new Socket(Registry.nodeController.getNodeAddress(), Registry.port);
+            this.client = new Socket(Registry.ghost, Registry.port);
             this.input = new DataInputStream(client.getInputStream());
             this.output = new DataOutputStream(client.getOutputStream());
         } catch (IOException ex) {
@@ -43,6 +43,24 @@ public class Client {
     }
     
     public void defineRing(){
+        try {
+            //establish connection
+            output.writeUTF(Registry.startCommunication);
+            String response = input.readUTF();
+            System.out.print("response: " + response);
+            switch (response) {
+                case Registry.startCommunication:                     
+                    output.writeUTF(Registry.startCommunication);
+                    break;
+                default:
+                    System.out.println("Invalid request");
+                    output.writeUTF(Registry.endCommunication);
+                    break;
+            }            
+            disconnet();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

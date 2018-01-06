@@ -23,12 +23,11 @@ public class Server extends GlobalThread {
     private int port = Registry.port;
     private ServerSocket server = null;
     
-    public Server(Socket client, DataInputStream input, DataOutputStream output) {
-        super(client, input, output);
-        
+    public Server() {
+        super();        
         try {
             this.server = new ServerSocket(Registry.port);
-            super.client = server.accept();
+            super.client = server.accept();            
             super.input = new DataInputStream(super.client.getInputStream());
             super.output = new DataOutputStream(super.client.getOutputStream());
         } catch (IOException ex) {
@@ -39,10 +38,11 @@ public class Server extends GlobalThread {
     }
     
     public void listen(){
-        try {
+        System.out.println("Listenning request");
+        try {            
             while (true) {                
                 super.client = server.accept();
-                ((ServerThread) new ServerThread(super.client, super.input, super.output)).start();
+                ((ServerThread) new ServerThread(super.client)).start();
             }
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,6 +53,7 @@ public class Server extends GlobalThread {
 
     @Override
     public void run() {
+        System.out.println("Starting ghost server");
         listen();
     }
     

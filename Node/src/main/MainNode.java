@@ -8,10 +8,6 @@ package main;
 
 
 import communication.Client;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
-import communication.Server;
 
 /**
  *
@@ -25,10 +21,8 @@ public class MainNode {
     public static void main(String[] args) {
 //        Server server = new Server();
 //        server.start();
-
         
         Client client = new Client();
-        
-        
+        client.defineRing();
     }
 }

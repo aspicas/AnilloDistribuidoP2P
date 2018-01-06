@@ -17,6 +17,10 @@ public class Node {
     private String predecessor;
 
     public Node() {
+        this.nodeId = "";
+        this.address = "";
+        this.successor = "";
+        this.predecessor = "";
     }
 
     public Node(String address) {
