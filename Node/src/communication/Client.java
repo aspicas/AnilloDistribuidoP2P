@@ -51,13 +51,12 @@ public class Client {
             response = input.readUTF();
             System.out.println("response: " + response);
             switch (response) {
-                case Registry.startCommunication:          
-                    System.out.println("Entro");
-                    
+                case Registry.startCommunication:
+                    System.out.println("establishing node in the ring");
+                    output.writeUTF(Registry.nodeController.nodeToJson());
                     break;
                 default:
-                    System.out.println("Invalid response");
-                    output.writeUTF(Registry.endCommunication);
+                    System.out.println(response);                    
                     break;
             }            
             disconnet();

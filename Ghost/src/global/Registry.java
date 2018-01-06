@@ -5,6 +5,9 @@
  */
 package global;
 
+import controller.NodeController;
+import view.NodeView;
+
 /**
  *
  * @author david
@@ -16,4 +19,6 @@ public class Registry {
     public static final String encrypted = "SHA1";
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
+    public static final String invalidRequest = "Invalid request";
+    public static final NodeController nodeController = new NodeController(null, new NodeView());
 }

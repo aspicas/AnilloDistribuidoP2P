@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.google.gson.Gson;
 import global.Registry;
 import model.Node;
 import view.NodeView;
@@ -42,6 +43,16 @@ public class NodeController {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+    
+    public String nodeToJson(){
+        Gson gson = new Gson();
+        return gson.toJson(node);
+    }
+    
+    public void jsonToNode(String json){
+        Gson gson = new Gson();
+        this.node = gson.fromJson(json, Node.class);
     }
     
     public void showNode(){

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Node;
 
 /**
  *
@@ -29,15 +30,19 @@ public class ServerThread extends GlobalThread{
         try {
             String request = "";
             
-            //establish connection
+            //establish connection         
             request = super.input.readUTF();
-            System.out.println("request: " + request);            
+            System.out.println("request: " + request);
             switch (request) {
                 case Registry.startCommunication:                     
                     output.writeUTF(Registry.startCommunication);
+                    request = super.input.readUTF();
+                    System.out.println("json: " + request);
+                    Registry.nodeController.jsonToNode(request);
+                    
                     break;
                 default:
-                    System.out.println("Invalid request");
+                    System.out.println(Registry.invalidRequest);
                     output.writeUTF(Registry.endCommunication);
                     break;
             }
