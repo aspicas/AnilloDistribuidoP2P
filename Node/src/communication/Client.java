@@ -107,11 +107,11 @@ public class Client {
                     output.writeUTF(command);
                     response = input.readUTF();
                     System.out.println("response: " + response);
-                    if (response == Registry.changePredeccessor) {
+                    if (response.equals(Registry.changePredeccessor)) {
                         output.writeUTF(Registry.nodeController.getNode().getSuccessor());
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                    } else if (response == Registry.changeSuccessor) {
+                    } else if (response.equals(Registry.changeSuccessor)) {
                         output.writeUTF(Registry.nodeController.getNode().getPredecessor());
                         response = input.readUTF();
                         System.out.println("response: " + response);

@@ -55,7 +55,7 @@ public class ServerThread extends GlobalThread {
             //establish connection         
             request = input.readUTF();
             System.out.println("request: " + request);
-            if (request == Registry.startCommunication) {
+            if (request.equals(Registry.startCommunication)) {
                 output.writeUTF(Registry.startCommunication);
                 request = input.readUTF();
                 System.out.println("request: " + request);
@@ -64,12 +64,14 @@ public class ServerThread extends GlobalThread {
                         output.writeUTF(Registry.changePredeccessor);
                         request = input.readUTF();
                         Registry.nodeController.getNode().setPredecessor(request);
+                        System.out.println("Predecessor: " + Registry.nodeController.getNode().getPredecessor());
                         output.writeUTF(Registry.endCommunication);
                         break;
                     case Registry.changeSuccessor:
                         output.writeUTF(Registry.changePredeccessor);
                         request = input.readUTF();
                         Registry.nodeController.getNode().setSuccessor(request);
+                        System.out.println("Successor: " + Registry.nodeController.getNode().getSuccessor());
                         output.writeUTF(Registry.endCommunication);
                         break;
                     default:
