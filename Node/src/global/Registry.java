@@ -20,4 +20,5 @@ public class Registry {
     public static final String encrypted = "SHA1";
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
+    public static String path = "/home/jesus/Desktop";
 }
