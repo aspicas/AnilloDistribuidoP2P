@@ -54,6 +54,10 @@ public class Client {
                 case Registry.startCommunication:
                     System.out.println("establishing node in the ring");
                     output.writeUTF(Registry.nodeController.nodeToJson());
+                    response = input.readUTF();
+                    System.out.println("json: " + response);
+                    Registry.nodeController.jsonToNode(response);
+                    output.writeUTF(Registry.endCommunication);
                     break;
                 default:
                     System.out.println(response);                    

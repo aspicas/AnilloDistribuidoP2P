@@ -9,7 +9,7 @@ package model;
  *
  * @author david
  */
-public class Node {
+public class Node implements Comparable{
     
     private String nodeId;
     private String address;
@@ -17,6 +17,10 @@ public class Node {
     private String predecessor;
 
     public Node() {
+        this.nodeId = "";
+        this.address = "";
+        this.successor = "";
+        this.predecessor = "";
     }
 
     public Node(String address) {
@@ -61,4 +65,11 @@ public class Node {
     public void setPredecessor(String predecessor) {
         this.predecessor = predecessor;
     }   
+
+    @Override
+    public int compareTo(Object o) {
+        String compareId=((Node) o).getNodeId();
+        /* For Ascending order*/
+        return this.nodeId.compareTo(compareId);        
+    }
 }

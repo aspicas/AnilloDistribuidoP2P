@@ -7,6 +7,9 @@ package controller;
 
 import com.google.gson.Gson;
 import global.Registry;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import model.Node;
 import view.NodeView;
 
@@ -17,6 +20,7 @@ import view.NodeView;
 public class NodeController {
     private Node node = null;
     private NodeView nodeView = null;
+    private ArrayList<Node> fingerTable = new ArrayList<Node>();
 
     public NodeController(Node node, NodeView nodeView) {
         this.node = node;
@@ -55,7 +59,41 @@ public class NodeController {
         this.node = gson.fromJson(json, Node.class);
     }
     
+    public void addNodeToFingerTable(){
+        fingerTable.add(node);
+        Collections.sort(fingerTable);
+        setNodeSuccessorAndPredecessor();
+    }
+    
+    public void setNodeSuccessorAndPredecessor(){
+        int position = fingerTable.indexOf(node);
+        int max = fingerTable.toArray().length;
+        String successor;
+        String predecessor;
+        
+        if (position != -1 && position + 1 < max && position - 1 >= 0){
+            predecessor = fingerTable.get(position - 1).getAddress();
+            node.setPredecessor(predecessor);
+            successor = fingerTable.get(position + 1).getAddress();
+            node.setSuccessor(successor);
+        } else if (position + 1 < max) {
+            predecessor = fingerTable.get(max - 1).getAddress();
+            node.setPredecessor(predecessor);
+            successor = fingerTable.get(position + 1).getAddress();
+            node.setSuccessor(successor);
+        } else if (position - 1 >= 0) {
+            predecessor = fingerTable.get(position - 1).getAddress();
+            node.setPredecessor(predecessor);
+            successor = fingerTable.get(0).getAddress();
+            node.setSuccessor(successor);            
+        }                
+    }
+    
     public void showNode(){
         nodeView.showNode(node.getNodeId(), node.getAddress(), node.getSuccessor(), node.getPredecessor());
+    }
+    
+    public void showFingerTable(){
+        nodeView.showFingerTable(fingerTable);
     }
 }
