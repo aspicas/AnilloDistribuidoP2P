@@ -62,9 +62,19 @@ public class ServerThread extends GlobalThread {
                 switch (request) {
                     case Registry.changePredeccessor:
                         output.writeUTF(Registry.changePredeccessor);
-                        
+                        request = input.readUTF();
+                        Registry.nodeController.getNode().setPredecessor(request);
+                        output.writeUTF(Registry.endCommunication);
+                        break;
+                    case Registry.changeSuccessor:
+                        output.writeUTF(Registry.changePredeccessor);
+                        request = input.readUTF();
+                        Registry.nodeController.getNode().setSuccessor(request);
+                        output.writeUTF(Registry.endCommunication);
                         break;
                     default:
+                        System.out.println(Registry.invalidRequest);
+                        output.writeUTF(Registry.invalidRequest);
                         break;
                 }
             } else {

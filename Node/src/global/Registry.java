@@ -23,4 +23,5 @@ public class Registry {
     public static final String invalidRequest = "Invalid request";
     public static final String changePredeccessor = "Send Predeccessor";
     public static final String changeSuccessor = "Send Succesor";
+    public static String path = "/home/jesus/Desktop";
 }
