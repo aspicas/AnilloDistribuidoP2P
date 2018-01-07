@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  *
  * @author david
  */
-public class Server extends GlobalThread {
-    private int port = Registry.port;
+public class Server extends GlobalThread {    
+    
     private ServerSocket server = null;
     
     public Server() {

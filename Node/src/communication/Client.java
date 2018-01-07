@@ -39,10 +39,19 @@ public class Client {
     }
     
     public void requestStatus(){
-        
+
     }
     
-    public void defineRing(){
+        
+    public void changeCommunicationChannel(){
+        try {
+            this.client = new Socket(Registry.nodeController.getNode().getSuccessor(), Registry.port);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void defineGhostRing(){
         try {
             String response = "";
             
@@ -69,6 +78,32 @@ public class Client {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public void updateNodeRing(){
+        try {
+            String response = "";
+            
+            //establish connection
+            output.writeUTF(Registry.startCommunication);
+            response = input.readUTF();
+            System.out.println("response: " + response);
+            switch (response) {
+                case Registry.startCommunication:
+                    System.out.println("update node in the ring");
+                    output.writeUTF(Registry.nodeController.nodeToJson());
+                    response = input.readUTF();                    
+                    output.writeUTF(Registry.endCommunication);
+                    break;
+                default:
+                    System.out.println(response);                    
+                    break;
+            }            
+            disconnet();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void disconnet(){

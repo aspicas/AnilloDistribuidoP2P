@@ -8,6 +8,7 @@ package main;
 
 
 import communication.Client;
+import communication.Server;
 
 /**
  *
@@ -19,10 +20,12 @@ public class MainNode {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Server server = new Server();
-//        server.start();
+        Server server = new Server();
+        server.start();
         
         Client client = new Client();
-        client.defineRing();
+        client.defineGhostRing();
+        client.changeCommunicationChannel();
+        client.updateNodeRing();
     }
 }

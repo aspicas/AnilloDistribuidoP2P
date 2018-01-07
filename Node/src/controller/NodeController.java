@@ -28,6 +28,10 @@ public class NodeController {
         return node.getAddress();
     }
     
+    public Node getNode(){
+        return node;
+    }
+    
     public String getSHA1(String txt) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest
