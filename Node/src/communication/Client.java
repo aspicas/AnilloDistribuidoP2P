@@ -44,8 +44,10 @@ public class Client {
     
         
     public void changeCommunicationChannel(){
-        try {
+        try {            
             this.client = new Socket(Registry.nodeController.getNode().getSuccessor(), Registry.port);
+            this.input = new DataInputStream(client.getInputStream());
+            this.output = new DataOutputStream(client.getOutputStream());
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }

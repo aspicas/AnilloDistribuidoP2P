@@ -25,6 +25,7 @@ public class MainNode {
         
         Client client = new Client();
         client.defineGhostRing();
+        client.disconnet();
         client.changeCommunicationChannel();
         client.updateNodeRing();
     }
