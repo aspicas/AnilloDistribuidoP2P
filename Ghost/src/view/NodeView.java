@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.util.ArrayList;
+import model.Node;
+
 /**
  *
  * @author david
@@ -17,5 +20,14 @@ public class NodeView {
         System.out.println("address: " + address);
         System.out.println("successor: " + successor);
         System.out.println("predecessor: " + predecessor);
+    }
+    
+    public void showFingerTable(ArrayList<Node> fingerTable){
+        for (Node node: fingerTable){
+            System.out.println("Node: {id: "+ node.getNodeId() +", "
+                    + "address: "+ node.getAddress() +", "
+                            + "successor: "+ node.getSuccessor() +", "
+                                    + "predecessor: "+ node.getPredecessor() +"}");
+        }
     }
 }

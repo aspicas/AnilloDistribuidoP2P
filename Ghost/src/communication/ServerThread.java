@@ -39,6 +39,8 @@ public class ServerThread extends GlobalThread{
                     request = super.input.readUTF();
                     System.out.println("json: " + request);
                     Registry.nodeController.jsonToNode(request);
+                    Registry.nodeController.showNode();
+                    Registry.nodeController.addNodeToFingerTable();
                     
                     break;
                 default:
