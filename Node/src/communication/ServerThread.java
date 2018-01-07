@@ -6,6 +6,7 @@
 package communication;
 
 import global.GlobalThread;
+import global.Registry;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -45,10 +46,40 @@ public class ServerThread extends GlobalThread {
     public void downloadNumberXVideo(){
         
     }
-   
+    
+    public void definingRequest(){
+         System.out.println("Start defining request");
+        try {
+            String request = "";
+            
+            //establish connection         
+            request = input.readUTF();
+            System.out.println("request: " + request);
+            if (request == Registry.startCommunication) {
+                output.writeUTF(Registry.startCommunication);
+                request = input.readUTF();
+                System.out.println("request: " + request);
+                switch (request) {
+                    case Registry.changePredeccessor:
+                        output.writeUTF(Registry.changePredeccessor);
+                        
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                System.out.println(Registry.invalidRequest);
+                output.writeUTF(Registry.endCommunication);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override
     public void run() {
-        
+        System.out.println("Defining request");
+        definingRequest();
     }
     
 }

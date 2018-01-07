@@ -20,4 +20,7 @@ public class Registry {
     public static final String encrypted = "SHA1";
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
+    public static final String invalidRequest = "Invalid request";
+    public static final String changePredeccessor = "Send Predeccessor";
+    public static final String changeSuccessor = "Send Succesor";
 }

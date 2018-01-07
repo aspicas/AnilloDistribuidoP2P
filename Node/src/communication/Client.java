@@ -43,9 +43,19 @@ public class Client {
     }
     
         
-    public void changeCommunicationChannel(){
+    public void changeCommunicationChannelToSuccessor(){
         try {            
             this.client = new Socket(Registry.nodeController.getNode().getSuccessor(), Registry.port);
+            this.input = new DataInputStream(client.getInputStream());
+            this.output = new DataOutputStream(client.getOutputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void changeCommunicationChannelToPredecessor(){
+        try {            
+            this.client = new Socket(Registry.nodeController.getNode().getPredecessor(), Registry.port);
             this.input = new DataInputStream(client.getInputStream());
             this.output = new DataOutputStream(client.getOutputStream());
         } catch (IOException ex) {
@@ -82,7 +92,7 @@ public class Client {
         
     }
     
-    public void updateNodeRing(){
+    public void updateNodeRing(String command){
         try {
             String response = "";
             
@@ -93,10 +103,10 @@ public class Client {
             switch (response) {
                 case Registry.startCommunication:
                     System.out.println("update node in the ring");
-                    output.writeUTF(Registry.nodeController.nodeToJson());
-                    response = input.readUTF();                    
-                    output.writeUTF(Registry.endCommunication);
-                    break;
+                    output.writeUTF(command);
+                    response = input.readUTF();
+                    System.out.println("response: " + response);
+                    
                 default:
                     System.out.println(response);                    
                     break;

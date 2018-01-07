@@ -33,6 +33,7 @@ public class Server extends GlobalThread{
     }        
     
     public void listen(){
+        System.out.println("Listenning request");
         try {
             while (true) {                
                 super.client = server.accept();
@@ -47,6 +48,7 @@ public class Server extends GlobalThread{
    
     @Override
     public void run() {
+        System.out.println("Starting ghost server");
         listen();
     }
     

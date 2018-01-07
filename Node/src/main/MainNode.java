@@ -9,6 +9,7 @@ package main;
 
 import communication.Client;
 import communication.Server;
+import global.Registry;
 
 /**
  *
@@ -20,13 +21,14 @@ public class MainNode {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Start server");
         Server server = new Server();
         server.start();
         
         Client client = new Client();
         client.defineGhostRing();
         client.disconnet();
-        client.changeCommunicationChannel();
-        client.updateNodeRing();
+        client.changeCommunicationChannelToSuccessor();
+        client.updateNodeRing(Registry.changePredeccessor);
     }
 }
