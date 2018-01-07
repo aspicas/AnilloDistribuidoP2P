@@ -48,7 +48,7 @@ public class Server extends GlobalThread{
    
     @Override
     public void run() {
-        System.out.println("Starting ghost server");
+        System.out.println("Starting client server");
         listen();
     }
     

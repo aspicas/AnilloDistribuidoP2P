@@ -103,6 +103,7 @@ public class Client {
             switch (response) {
                 case Registry.startCommunication:
                     System.out.println("update node in the ring");
+                    System.out.println(command);
                     output.writeUTF(command);
                     response = input.readUTF();
                     System.out.println("response: " + response);
