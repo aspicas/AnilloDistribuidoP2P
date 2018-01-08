@@ -28,10 +28,15 @@ public class MainNode {
         Client client = new Client();
         client.defineGhostRing();
         client.disconnet();
-        client.changeCommunicationChannelToSuccessor();
+        
+        client.openCommunicationChannelToPredecessor();
+        client.updateNodeRing(Registry.changeSuccessor);        
+        client.disconnet();
+        
+        client.openCommunicationChannelToSuccessor();
         client.updateNodeRing(Registry.changePredeccessor);
         client.disconnet();
-        client.changeCommunicationChannelToPredecessor();
-        client.updateNodeRing(Registry.changeSuccessor);
+        
+        
     }
 }

@@ -43,7 +43,7 @@ public class Client {
     }
     
         
-    public void changeCommunicationChannelToSuccessor(){
+    public void openCommunicationChannelToSuccessor(){
         try {            
             this.client = new Socket(Registry.nodeController.getNode().getSuccessor(), Registry.port);
             this.input = new DataInputStream(client.getInputStream());
@@ -53,7 +53,7 @@ public class Client {
         }
     }
     
-    public void changeCommunicationChannelToPredecessor(){
+    public void openCommunicationChannelToPredecessor(){
         try {            
             this.client = new Socket(Registry.nodeController.getNode().getPredecessor(), Registry.port);
             this.input = new DataInputStream(client.getInputStream());
