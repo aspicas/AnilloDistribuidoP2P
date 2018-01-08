@@ -21,26 +21,40 @@ import global.Registry;
 public class ResourceController {
     private Resource resource = null;
     private ResourceView resourceView = null;
+    private List<Resource> resourceList = new ArrayList<Resource>();
     
     public ResourceController(Resource resource, ResourceView resourceView) {
-        this.resource = resource;
-        this.resource.setPath(Registry.path);
+        this.resource = resource;        
         this.resourceView = resourceView;
     }
     
-    public List<String> getFileNamesFromDirectory(String path) {
-        List<String> filesList = new ArrayList<String>();
-        
-        File directory = new File(path);
+    public void getFileNamesFromDirectory() {        
+        File directory = new File(Registry.downloadPath);
         File[] files = directory.listFiles();
-        for (File f:files) {
-            filesList.add(f.getAbsolutePath());
+        for (File f:files) {            
+            resource = new Resource(getSHA1(f.getName()), f.getAbsolutePath(), f.getName());
+            resourceList.add(resource);
         }
-        
-        return filesList;
     }
     
-    public void showFileNamesFromFilesList(List<String> filesList) {
-        resourceView.showFileNamesFromFilesList(filesList);
+    public String getSHA1(String txt) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest
+                    .getInstance(Registry.encrypted);
+            byte[] array = md.digest(txt.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100)
+                        .substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    public void showResourceList() {
+        resourceView.showResourceList(resourceList);
     }
 }

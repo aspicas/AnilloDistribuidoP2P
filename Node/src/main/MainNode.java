@@ -9,7 +9,10 @@ package main;
 
 import communication.Client;
 import communication.Server;
+import controller.ResourceController;
 import global.Registry;
+import model.Resource;
+import view.ResourceView;
 
 /**
  *
@@ -36,7 +39,5 @@ public class MainNode {
         client.openCommunicationChannelToSuccessor();
         client.updateNodeRing(Registry.changePredeccessor);
         client.disconnet();
-        
-        
     }
 }
