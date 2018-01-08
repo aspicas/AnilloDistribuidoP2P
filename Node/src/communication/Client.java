@@ -84,7 +84,6 @@ public class Client {
                     System.out.println(response);                    
                     break;
             }            
-            disconnet();
             
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
