@@ -48,10 +48,10 @@ public class ServerThread extends GlobalThread {
     }
     
     public void definingRequest(){
-         System.out.println("Start defining request");
+        System.out.println("Start defining request");        
         try {
             String request = "";
-            
+
             //establish connection         
             request = input.readUTF();
             System.out.println("request: " + request);
@@ -116,6 +116,8 @@ public class ServerThread extends GlobalThread {
     public void run() {
         System.out.println("Defining request");
         definingRequest();
+        Registry.nodeController.showNode();
+        Registry.resourceController.showResourceList();
     }
     
 }
