@@ -113,6 +113,7 @@ public class Client {
                         output.writeUTF(Registry.nodeController.getNode().getAddress());
                         //Exchange of resources                        
                         output.writeUTF(Registry.giveResources);
+                        Registry.resourceController.getFileNamesFromDirectory();
                         output.writeUTF(Registry.resourceController.getNodeResourceList());
                         //End Communication
                         response = input.readUTF();
@@ -133,6 +134,10 @@ public class Client {
             }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (command.equals(Registry.changePredecessor)) {
+            Registry.nodeController.showNode();
+            Registry.resourceController.showResourceList();
         }
     }
     

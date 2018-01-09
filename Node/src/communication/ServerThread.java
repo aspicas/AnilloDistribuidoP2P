@@ -115,9 +115,7 @@ public class ServerThread extends GlobalThread {
     @Override
     public void run() {
         System.out.println("Defining request");
-        definingRequest();
-        Registry.nodeController.showNode();
-        Registry.resourceController.showResourceList();
+        definingRequest();      
     }
     
 }
