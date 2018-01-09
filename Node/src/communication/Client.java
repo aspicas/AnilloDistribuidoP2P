@@ -92,48 +92,50 @@ public class Client {
     }
     
     public void updateNodeRing(String command){
-        try {
-            String response = "";
-            
-            //establish connection
-            output.writeUTF(Registry.startCommunication);
-            response = input.readUTF();
-            System.out.println("response: " + response);
-            switch (response) {
-                case Registry.startCommunication:
-                    System.out.println("update node in the ring");
-                    System.out.println(command);
-                    output.writeUTF(command);
-                    response = input.readUTF();
-                    System.out.println("response: " + response);
-                    if (response.equals(Registry.changePredecessor)) { //Talking to successor
-                        //Change Predeccessor
-                        output.writeUTF(Registry.nodeController.getNode().getSuccessor());
-                        //Exchange of resources                        
-                        output.writeUTF(Registry.giveResources);
-                        output.writeUTF(Registry.resourceController.getNodeResourceList());
-                        //End Communication
+        if (!Registry.nodeController.getNode().getPredecessor().equals("")) {
+            try {
+                String response = "";
+
+                //establish connection
+                output.writeUTF(Registry.startCommunication);
+                response = input.readUTF();
+                System.out.println("response: " + response);
+                switch (response) {
+                    case Registry.startCommunication:
+                        System.out.println("update node in the ring");
+                        System.out.println(command);
+                        output.writeUTF(command);
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                    } else if (response.equals(Registry.changeSuccessor)) { //Talking to predeccessor
-                        //Change Successor
-                        output.writeUTF(Registry.nodeController.getNode().getPredecessor());
-                        //Exchange of resources
-                        output.writeUTF(Registry.getResources);
-                        response = input.readUTF();
-                        System.out.println("response: " + response);
-                        Registry.resourceController.addExternalResources(response);                        
-                        //End Communication
-                        response = input.readUTF();
-                        System.out.println("response: " + response);
-                    }
-                default:
-                    System.out.println(response);                    
-                    break;
+                        if (response.equals(Registry.changePredecessor)) { //Talking to successor
+                            //Change Predeccessor
+                            output.writeUTF(Registry.nodeController.getNode().getSuccessor());
+                            //Exchange of resources                        
+                            output.writeUTF(Registry.giveResources);
+                            output.writeUTF(Registry.resourceController.getNodeResourceList());
+                            //End Communication
+                            response = input.readUTF();
+                            System.out.println("response: " + response);
+                        } else if (response.equals(Registry.changeSuccessor)) { //Talking to predeccessor
+                            //Change Successor
+                            output.writeUTF(Registry.nodeController.getNode().getPredecessor());
+                            //Exchange of resources
+                            output.writeUTF(Registry.getResources);
+                            response = input.readUTF();
+                            System.out.println("response: " + response);
+                            Registry.resourceController.addExternalResources(response);                        
+                            //End Communication
+                            response = input.readUTF();
+                            System.out.println("response: " + response);
+                        }
+                    default:
+                        System.out.println(response);                    
+                        break;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }
     
     public void disconnet(){
