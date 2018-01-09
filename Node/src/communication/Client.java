@@ -107,11 +107,19 @@ public class Client {
                     response = input.readUTF();
                     System.out.println("response: " + response);
                     if (response.equals(Registry.changePredeccessor)) {
+                        //Change Predeccessor
                         output.writeUTF(Registry.nodeController.getNode().getSuccessor());
+                        //Exchange of resources
+                        
+                        //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
                     } else if (response.equals(Registry.changeSuccessor)) {
+                        //Change Successor
                         output.writeUTF(Registry.nodeController.getNode().getPredecessor());
+                        //Exchange of resources
+                        
+                        //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
                     }
