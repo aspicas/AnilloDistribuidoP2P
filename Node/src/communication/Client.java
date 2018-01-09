@@ -24,6 +24,7 @@ public class Client {
 
     public Client() {
         try {
+            System.out.println("Ghost" + Registry.ghost);
             this.client = new Socket(Registry.ghost, Registry.port);
             this.input = new DataInputStream(client.getInputStream());
             this.output = new DataOutputStream(client.getOutputStream());
@@ -78,6 +79,7 @@ public class Client {
                     response = input.readUTF();
                     System.out.println("json: " + response);
                     Registry.nodeController.jsonToNode(response);
+                    Registry.nodeController.showNode();
                     output.writeUTF(Registry.endCommunication);
                     break;
                 default:
@@ -108,7 +110,7 @@ public class Client {
                     System.out.println("response: " + response);
                     if (response.equals(Registry.changePredecessor)) { //Talking to successor
                         //Change Predeccessor
-                        output.writeUTF(Registry.nodeController.getNode().getSuccessor());
+                        output.writeUTF(Registry.nodeController.getNode().getAddress());
                         //Exchange of resources                        
                         output.writeUTF(Registry.giveResources);
                         output.writeUTF(Registry.resourceController.getNodeResourceList());
@@ -117,12 +119,13 @@ public class Client {
                         System.out.println("response: " + response);
                     } else if (response.equals(Registry.changeSuccessor)) { //Talking to predeccessor
                         //Change Successor
-                        output.writeUTF(Registry.nodeController.getNode().getPredecessor());
+                        System.out.println(Registry.nodeController.getNode().getAddress());
+                        output.writeUTF(Registry.nodeController.getNode().getAddress());
                         //Exchange of resources
                         output.writeUTF(Registry.getResources);
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                        Registry.resourceController.addExternalResources(response);                        
+                        Registry.resourceController.addExternalResources(response);
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
