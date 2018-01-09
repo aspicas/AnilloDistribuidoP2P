@@ -18,7 +18,7 @@ import view.ResourceView;
  */
 public class Registry {
     //Communication
-    public static final String ghost = "192.168.1.101";
+    public static final String ghost = "192.168.1.100";
     public static final int port = 2000;
     public static final String address = "192.168.1.112";
     
