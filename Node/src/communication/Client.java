@@ -129,10 +129,7 @@ public class Client {
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                    }
-                default:
-                    System.out.println(response);                    
-                    break;
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);

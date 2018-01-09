@@ -48,74 +48,78 @@ public class ServerThread extends GlobalThread {
     }
     
     public void definingRequest(){
-         System.out.println("Start defining request");
-        try {
-            String request = "";
-            
-            //establish connection         
-            request = input.readUTF();
-            System.out.println("request: " + request);
-            if (request.equals(Registry.startCommunication)) {
-                output.writeUTF(Registry.startCommunication);
+        System.out.println("Start defining request");
+        if (!Registry.nodeController.getNode().getPredecessor().equals("")) {
+            try {
+                String request = "";
+
+                //establish connection         
                 request = input.readUTF();
                 System.out.println("request: " + request);
-                switch (request) {
-                    case Registry.changePredecessor: //Talking to successor
-                        //Change predecsessor
-                        output.writeUTF(Registry.changePredecessor);
-                        request = input.readUTF();
-                        System.out.println("request: " + request);
-                        Registry.nodeController.getNode().setPredecessor(request);
-                        System.out.println("Predecessor: " + Registry.nodeController.getNode().getPredecessor());
-                        //Exchange of resources
-                        request = input.readUTF();
-                        System.out.println("request: " + request);
-                        if (request.equals(Registry.giveResources)) {
-                            Registry.resourceController.deleteExternalResources();
+                if (request.equals(Registry.startCommunication)) {
+                    output.writeUTF(Registry.startCommunication);
+                    request = input.readUTF();
+                    System.out.println("request: " + request);
+                    switch (request) {
+                        case Registry.changePredecessor: //Talking to successor
+                            //Change predecsessor
+                            output.writeUTF(Registry.changePredecessor);
                             request = input.readUTF();
                             System.out.println("request: " + request);
-                            Registry.resourceController.addExternalResources(request);
-                        } else {
+                            Registry.nodeController.getNode().setPredecessor(request);
+                            System.out.println("Predecessor: " + Registry.nodeController.getNode().getPredecessor());
+                            //Exchange of resources
+                            request = input.readUTF();
+                            System.out.println("request: " + request);
+                            if (request.equals(Registry.giveResources)) {
+                                Registry.resourceController.deleteExternalResources();
+                                request = input.readUTF();
+                                System.out.println("request: " + request);
+                                Registry.resourceController.addExternalResources(request);
+                            } else {
+                                output.writeUTF(Registry.invalidRequest);
+                            }
+                            //End communication
+                            output.writeUTF(Registry.endCommunication);
+                            break;
+                        case Registry.changeSuccessor: //Talking to predecessor
+                            //Change successor
+                            output.writeUTF(Registry.changeSuccessor);
+                            request = input.readUTF();
+                            Registry.nodeController.getNode().setSuccessor(request);
+                            System.out.println("Successor: " + Registry.nodeController.getNode().getSuccessor());
+                            //Exchange of resources
+                            request = input.readUTF();
+                            System.out.println("request: " + request);
+                            if (request.equals(Registry.getResources)) {
+                                output.writeUTF(Registry.resourceController.getNodeResourceList());
+                            } else {
+                                output.writeUTF(Registry.invalidRequest);
+                            }
+                            //End communication
+                            output.writeUTF(Registry.endCommunication);
+                            break;
+                        default:
+                            System.out.println(Registry.invalidRequest);
                             output.writeUTF(Registry.invalidRequest);
-                        }
-                        //End communication
-                        output.writeUTF(Registry.endCommunication);
-                        break;
-                    case Registry.changeSuccessor: //Talking to predecessor
-                        //Change successor
-                        output.writeUTF(Registry.changeSuccessor);
-                        request = input.readUTF();
-                        Registry.nodeController.getNode().setSuccessor(request);
-                        System.out.println("Successor: " + Registry.nodeController.getNode().getSuccessor());
-                        //Exchange of resources
-                        request = input.readUTF();
-                        System.out.println("request: " + request);
-                        if (request.equals(Registry.getResources)) {
-                            output.writeUTF(Registry.resourceController.getNodeResourceList());
-                        } else {
-                            output.writeUTF(Registry.invalidRequest);
-                        }
-                        //End communication
-                        output.writeUTF(Registry.endCommunication);
-                        break;
-                    default:
-                        System.out.println(Registry.invalidRequest);
-                        output.writeUTF(Registry.invalidRequest);
-                        break;
+                            break;
+                    }
+                } else {
+                    System.out.println(Registry.invalidRequest);
+                    output.writeUTF(Registry.endCommunication);
                 }
-            } else {
-                System.out.println(Registry.invalidRequest);
-                output.writeUTF(Registry.endCommunication);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (IOException ex) {
+                Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+        }        
     }
     
     @Override
     public void run() {
         System.out.println("Defining request");
         definingRequest();
+        Registry.nodeController.showNode();
+        Registry.resourceController.showResourceList();
     }
     
 }
