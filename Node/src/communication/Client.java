@@ -106,19 +106,23 @@ public class Client {
                     output.writeUTF(command);
                     response = input.readUTF();
                     System.out.println("response: " + response);
-                    if (response.equals(Registry.changePredeccessor)) {
+                    if (response.equals(Registry.changePredecessor)) { //Talking to successor
                         //Change Predeccessor
                         output.writeUTF(Registry.nodeController.getNode().getSuccessor());
-                        //Exchange of resources
-                        
+                        //Exchange of resources                        
+                        output.writeUTF(Registry.giveResources);
+                        output.writeUTF(Registry.resourceController.getNodeResourceList());
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                    } else if (response.equals(Registry.changeSuccessor)) {
+                    } else if (response.equals(Registry.changeSuccessor)) { //Talking to predeccessor
                         //Change Successor
                         output.writeUTF(Registry.nodeController.getNode().getPredecessor());
                         //Exchange of resources
-                        
+                        output.writeUTF(Registry.getResources);
+                        response = input.readUTF();
+                        System.out.println("response: " + response);
+                        Registry.resourceController.addExternalResources(response);                        
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);

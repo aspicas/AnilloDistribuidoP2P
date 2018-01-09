@@ -29,6 +29,7 @@ public class ResourceController {
     public ResourceController(Resource resource, ResourceView resourceView) {
         this.resource = resource;        
         this.resourceView = resourceView;
+        getFileNamesFromDirectory();
     }
     
     public void getFileNamesFromDirectory() {        
@@ -40,7 +41,7 @@ public class ResourceController {
         }
     }
     
-    public List<Resource> getNodeResourceList() {
+    public String getNodeResourceList() {
         List<Resource> resourceList = new ArrayList<>();
         File directory = new File(Registry.downloadPath);
         File[] files = directory.listFiles();
@@ -48,7 +49,8 @@ public class ResourceController {
             resource = new Resource(getSHA1(f.getName()), f.getAbsolutePath(), f.getName());
             resourceList.add(resource);
         }
-        return resourceList;
+        String output = resourceListToJson(resourceList);
+        return output;
     }
     
     public String getSHA1(String txt) {
@@ -79,6 +81,11 @@ public class ResourceController {
     }
     
     public String resourceListToJson(){
+        Gson gson = new Gson();
+        return gson.toJson(resourceList);
+    }
+    
+    public String resourceListToJson(List<Resource> resourceList){
         Gson gson = new Gson();
         return gson.toJson(resourceList);
     }

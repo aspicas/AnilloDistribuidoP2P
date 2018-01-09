@@ -60,25 +60,41 @@ public class ServerThread extends GlobalThread {
                 request = input.readUTF();
                 System.out.println("request: " + request);
                 switch (request) {
-                    case Registry.changePredeccessor:
+                    case Registry.changePredecessor: //Talking to successor
                         //Change predecsessor
-                        output.writeUTF(Registry.changePredeccessor);
+                        output.writeUTF(Registry.changePredecessor);
                         request = input.readUTF();
+                        System.out.println("request: " + request);
                         Registry.nodeController.getNode().setPredecessor(request);
                         System.out.println("Predecessor: " + Registry.nodeController.getNode().getPredecessor());
                         //Exchange of resources
-                        
+                        request = input.readUTF();
+                        System.out.println("request: " + request);
+                        if (request.equals(Registry.giveResources)) {
+                            Registry.resourceController.deleteExternalResources();
+                            request = input.readUTF();
+                            System.out.println("request: " + request);
+                            Registry.resourceController.addExternalResources(request);
+                        } else {
+                            output.writeUTF(Registry.invalidRequest);
+                        }
                         //End communication
                         output.writeUTF(Registry.endCommunication);
                         break;
-                    case Registry.changeSuccessor:
+                    case Registry.changeSuccessor: //Talking to predecessor
                         //Change successor
                         output.writeUTF(Registry.changeSuccessor);
                         request = input.readUTF();
                         Registry.nodeController.getNode().setSuccessor(request);
                         System.out.println("Successor: " + Registry.nodeController.getNode().getSuccessor());
                         //Exchange of resources
-                        
+                        request = input.readUTF();
+                        System.out.println("request: " + request);
+                        if (request.equals(Registry.getResources)) {
+                            output.writeUTF(Registry.resourceController.getNodeResourceList());
+                        } else {
+                            output.writeUTF(Registry.invalidRequest);
+                        }
                         //End communication
                         output.writeUTF(Registry.endCommunication);
                         break;

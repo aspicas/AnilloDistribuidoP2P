@@ -6,8 +6,11 @@
 package global;
 
 import controller.NodeController;
+import controller.ResourceController;
 import model.Node;
+import model.Resource;
 import view.NodeView;
+import view.ResourceView;
 
 /**
  *
@@ -21,6 +24,7 @@ public class Registry {
     
     //Controller
     public static NodeController nodeController = new NodeController(new Node(address), new NodeView());
+    public static ResourceController resourceController = new ResourceController(new Resource(), new ResourceView());
     
     //Encrypted
     public static final String encrypted = "SHA1";
@@ -29,8 +33,10 @@ public class Registry {
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
     public static final String invalidRequest = "Invalid request";
-    public static final String changePredeccessor = "Send Predeccessor";
+    public static final String changePredecessor = "Send Predeccessor";
     public static final String changeSuccessor = "Send Succesor";
+    public static final String getResources = "Get Resources";
+    public static final String giveResources = "Give Resources";
     
     //Paths
     public static final String downloadPath = "/home/david/Downloads/";

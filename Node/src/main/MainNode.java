@@ -37,7 +37,7 @@ public class MainNode {
         client.disconnet();
         
         client.openCommunicationChannelToSuccessor();
-        client.updateNodeRing(Registry.changePredeccessor);
+        client.updateNodeRing(Registry.changePredecessor);
         client.disconnet();
     }
 }
