@@ -31,12 +31,21 @@ public class Registry {
     
     //Commands
     public static final String startCommunication = "START";
-    public static final String endCommunication = "FINISH";
-    public static final String invalidRequest = "Invalid request";
+    public static final String endCommunication = "FINISH";    
     public static final String changePredecessor = "Send Predeccessor";
     public static final String changeSuccessor = "Send Succesor";
     public static final String getResources = "Get Resources";
     public static final String giveResources = "Give Resources";
+    public static final String searchResource = "BUSCAR_RECURSOS";
+    public static final String requestStatus = "ESTADO_SOLICITUDES";
+    public static final String offerResources = "RECURSOS_OFRECIDOS";
+    public static final String answerStatus = "ESTADO_RESPUESTAS";
+    public static final String downloadNumberXVideo = "NUM_DESCARGASXVIDEO";
+    public static final String exit = "EXIT";
+    
+    //Messages
+    public static final String invalidRequest = "Invalid request";
+    public static final String invalidCommand = "Invalid command";
     
     //Paths
     public static final String downloadPath = "/home/david/Downloads/";
