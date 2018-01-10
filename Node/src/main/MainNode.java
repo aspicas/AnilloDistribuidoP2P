@@ -11,6 +11,7 @@ import communication.Client;
 import communication.Server;
 import controller.ResourceController;
 import global.Registry;
+import java.util.Scanner;
 import model.Resource;
 import view.ResourceView;
 
@@ -46,5 +47,35 @@ public class MainNode {
             client.updateNodeRing(Registry.changePredecessor);
             client.disconnet();
         }
+        
+        /* CLIENTE*/
+        String line = "";
+        Scanner scanner = new Scanner(System.in);        
+        do {
+            while (line.toUpperCase() != "SALIR") {
+                System.out.print("$ ");
+                line = scanner.nextLine();
+                System.out.println(line);
+                switch (line) {
+                    case ("RECURSOS_OFRECIDOS"):
+                        
+                        break;
+                    case ("BUSCAR_RECURSO"):
+                        
+                        break;
+                    case ("ESTADO_SOLICITUDES"):
+                        break;
+                    case ("ESTADO_RESPUESTAS"):
+                        break;
+                    case ("NUM_DESCARGAS"):
+                        
+                    case ("SALIR"):
+                        System.exit(0);
+                    default:
+                        System.out.println("Comando invalido. Intentelo de nuevo.");
+                        break;
+                }
+            }
+        } while (!line.equals("EXIT"));/**/
     }
 }
