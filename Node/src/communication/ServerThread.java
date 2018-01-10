@@ -60,7 +60,7 @@ public class ServerThread extends GlobalThread {
                 request = input.readUTF();
                 System.out.println("request: " + request);
                 switch (request) {
-                    case Registry.changePredecessor: //Talking to successor
+                    case Registry.changePredecessor: //Talking to predecessor
                         //Change predecsessor
                         output.writeUTF(Registry.changePredecessor);
                         request = input.readUTF();
@@ -81,7 +81,7 @@ public class ServerThread extends GlobalThread {
                         //End communication
                         output.writeUTF(Registry.endCommunication);
                         break;
-                    case Registry.changeSuccessor: //Talking to predecessor
+                    case Registry.changeSuccessor: //Talking to successor 
                         //Change successor
                         output.writeUTF(Registry.changeSuccessor);
                         request = input.readUTF();
@@ -91,11 +91,14 @@ public class ServerThread extends GlobalThread {
                         request = input.readUTF();
                         System.out.println("request: " + request);
                         if (request.equals(Registry.getResources)) {
+                            System.out.println(Registry.resourceController.getNodeResourceList());
                             output.writeUTF(Registry.resourceController.getNodeResourceList());
                         } else {
+                            System.out.println(Registry.invalidRequest);
                             output.writeUTF(Registry.invalidRequest);
                         }
                         //End communication
+                        System.out.println(Registry.endCommunication);
                         output.writeUTF(Registry.endCommunication);
                         break;
                     default:
@@ -107,6 +110,9 @@ public class ServerThread extends GlobalThread {
                 System.out.println(Registry.invalidRequest);
                 output.writeUTF(Registry.endCommunication);
             }
+            Registry.nodeController.showNode();
+            Registry.resourceController.showResourceList();
+            System.out.println();
         } catch (IOException ex) {
             Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         }

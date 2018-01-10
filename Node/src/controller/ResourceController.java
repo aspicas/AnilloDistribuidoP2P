@@ -28,8 +28,7 @@ public class ResourceController {
     
     public ResourceController(Resource resource, ResourceView resourceView) {
         this.resource = resource;        
-        this.resourceView = resourceView;
-        getFileNamesFromDirectory();
+        this.resourceView = resourceView;        
     }
     
     public void getFileNamesFromDirectory() {        
