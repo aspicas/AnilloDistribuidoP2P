@@ -33,12 +33,17 @@ public class MainNode {
         client.defineGhostRing();
         client.disconnet();
         
-        client.openCommunicationChannelToPredecessor();
-        client.updateNodeRing(Registry.changeSuccessor);        
-        client.disconnet();
         
-        client.openCommunicationChannelToSuccessor();
-        client.updateNodeRing(Registry.changePredecessor);
-        client.disconnet();
+        if (!Registry.nodeController.getNode().getPredecessor().equals("")) {
+            client.openCommunicationChannelToPredecessor();
+            client.updateNodeRing(Registry.changeSuccessor);
+            client.disconnet();
+        }
+        
+        if (!Registry.nodeController.getNode().getSuccessor().equals("")) {
+            client.openCommunicationChannelToSuccessor();
+            client.updateNodeRing(Registry.changePredecessor);
+            client.disconnet();
+        }
     }
 }
