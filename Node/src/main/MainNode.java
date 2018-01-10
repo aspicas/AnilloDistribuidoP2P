@@ -24,6 +24,7 @@ public class MainNode {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Registry.resourceController.getFileNamesFromDirectory();
         System.out.println("Start server");
         System.out.println("Start server");
         Server server = new Server();

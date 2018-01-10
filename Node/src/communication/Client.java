@@ -112,8 +112,7 @@ public class Client {
                         //Change Predeccessor
                         output.writeUTF(Registry.nodeController.getNode().getAddress());
                         //Exchange of resources                        
-                        output.writeUTF(Registry.giveResources);
-                        Registry.resourceController.getFileNamesFromDirectory();
+                        output.writeUTF(Registry.giveResources);                        
                         output.writeUTF(Registry.resourceController.getNodeResourceList());
                         //End Communication
                         response = input.readUTF();
