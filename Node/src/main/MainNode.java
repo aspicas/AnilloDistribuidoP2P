@@ -70,12 +70,16 @@ public class MainNode {
                     case ("NUM_DESCARGAS"):
                         
                     case ("SALIR"):
+                        //Proceso de salida del anillo
+                        
                         System.exit(0);
                     default:
                         System.out.println("Comando invalido. Intentelo de nuevo.");
                         break;
                 }
             }
-        } while (!line.equals("EXIT"));/**/
+        } while (!line.equals("EXIT"));
+        
+        //Proceso de salida del anillo
     }
 }
