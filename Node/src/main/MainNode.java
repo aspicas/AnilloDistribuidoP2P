@@ -11,6 +11,7 @@ import communication.Client;
 import communication.Server;
 import controller.ResourceController;
 import global.Registry;
+import java.io.IOException;
 import java.util.Scanner;
 import model.Resource;
 import view.ResourceView;
@@ -24,7 +25,7 @@ public class MainNode {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Registry.resourceController.getFileNamesFromDirectory();
         System.out.println("Start server");
         System.out.println("Start server");
@@ -57,9 +58,16 @@ public class MainNode {
                 line = scanner.nextLine();
                 System.out.println(line);
                 switch (line) {
-                    case Registry.offerResources:                        
+                    case Registry.offerResources:
                         break;
-                    case Registry.searchResource:                        
+                    case Registry.searchResource:
+                        client.openCommunicationChannelToPredecessor();
+                        try {
+                            client.searchResource();
+                        } catch (IOException e) {
+                            System.out.println("¡Error buscando el recurso!");
+                        }
+                        client.disconnet();
                         break;
                     case Registry.requestStatus:
                         break;
