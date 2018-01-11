@@ -66,9 +66,9 @@ public class Client {
             current = bytesRead;
 
             do {
-               bytesRead =
-                  is.read(mybytearray, current, (mybytearray.length-current));
-               if(bytesRead >= 0) current += bytesRead;
+                bytesRead =
+                    is.read(mybytearray, current, (mybytearray.length-current));
+                if(bytesRead >= 0) current += bytesRead;
             } while(bytesRead > -1);
 
             bos.write(mybytearray, 0, current);
