@@ -20,7 +20,7 @@ public class Registry {
     //Communication
     public static final String ghost = "192.168.1.100";
     public static final int port = 2000;
-    public static final String address = "192.168.1.112";
+    public static final String address = "192.168.1.106";
     
     //Controller
     public static NodeController nodeController = new NodeController(new Node(address), new NodeView());
@@ -39,5 +39,5 @@ public class Registry {
     public static final String giveResources = "Give Resources";
     
     //Paths
-    public static final String downloadPath = "/home/david/Downloads/";
+    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
 }
