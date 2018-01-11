@@ -107,6 +107,16 @@ public class Client {
         }
     }
     
+    public void openCommunicationChannelToGhost(){
+        try {            
+            this.client = new Socket(Registry.ghost, Registry.port);
+            this.input = new DataInputStream(client.getInputStream());
+            this.output = new DataOutputStream(client.getOutputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void defineGhostRing(){
         try {
             String response = "";
@@ -172,7 +182,14 @@ public class Client {
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                }
+                    } else {
+                        //End Communication
+                        response = input.readUTF();
+                        System.out.println("response: " + response);
+                    }
+                default:
+                    System.out.println(Registry.invalidCommand);
+                    break;
             }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);

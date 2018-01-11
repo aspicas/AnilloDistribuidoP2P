@@ -42,6 +42,7 @@ public class Registry {
     public static final String answerStatus = "ESTADO_RESPUESTAS";
     public static final String downloadNumberXVideo = "NUM_DESCARGASXVIDEO";
     public static final String exit = "EXIT";
+    public static final String deleteNode = "Delete node";
     
     //Messages
     public static final String invalidRequest = "Invalid request";

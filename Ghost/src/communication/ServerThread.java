@@ -34,14 +34,22 @@ public class ServerThread extends GlobalThread{
                 case Registry.startCommunication:                     
                     output.writeUTF(Registry.startCommunication);
                     request = super.input.readUTF();
-                    System.out.println("json: " + request);
-                    Registry.nodeController.jsonToNode(request);
-                    Registry.nodeController.showNode();
-                    Registry.nodeController.addNodeToFingerTable();
-                    Registry.nodeController.showFingerTable();
-                    output.writeUTF(Registry.nodeController.nodeToJson());
-                    request = super.input.readUTF();
-                    System.out.println(request);
+                    System.out.println("request: " + request);
+                    if (Registry.deleteNode.equals(request)) {
+                        request = super.input.readUTF();
+                        System.out.println("request: " + request);
+                        Registry.nodeController.jsonToNode(request);
+                        Registry.nodeController.deleteNode();
+                        output.writeUTF(Registry.endCommunication);
+                    } else {
+                        Registry.nodeController.jsonToNode(request);
+                        Registry.nodeController.showNode();
+                        Registry.nodeController.addNodeToFingerTable();
+                        Registry.nodeController.showFingerTable();
+                        output.writeUTF(Registry.nodeController.nodeToJson());
+                        request = super.input.readUTF();
+                        System.out.println(request);
+                    }
                     break;
                 default:
                     System.out.println(Registry.invalidRequest);
