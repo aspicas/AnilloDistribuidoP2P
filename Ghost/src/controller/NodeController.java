@@ -119,6 +119,21 @@ public class NodeController {
         }
     }
     
+    public void deleteNode(){
+        int position = fingerTable.indexOf(node);
+        int max = fingerTable.toArray().length;
+        
+        if (!node.getSuccessor().equals(node.getPredecessor())){
+            fingerTable.get(position - 1).setSuccessor(node.getSuccessor());
+            fingerTable.get(position + 1).setPredecessor(node.getPredecessor());
+        }
+        fingerTable.remove(node);
+        if (max == 2) {
+            fingerTable.get(0).setPredecessor("");
+            fingerTable.get(0).setSuccessor("");
+        }
+    }
+    
     public void showNode(){
         nodeView.showNode(node.getNodeId(), node.getAddress(), node.getSuccessor(), node.getPredecessor());
     }

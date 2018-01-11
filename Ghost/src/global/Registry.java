@@ -25,6 +25,7 @@ public class Registry {
     public static final String startCommunication = "START";
     public static final String endCommunication = "FINISH";
     public static final String invalidRequest = "Invalid request";
+    public static final String deleteNode = "Delete node";
     
     //Controller
     public static final NodeController nodeController = new NodeController(new Node(), new NodeView());

@@ -101,6 +101,9 @@ public class ServerThread extends GlobalThread {
                         System.out.println(Registry.endCommunication);
                         output.writeUTF(Registry.endCommunication);
                         break;
+                    case Registry.deleteNode:
+                        
+                        break;
                     default:
                         System.out.println(Registry.invalidRequest);
                         output.writeUTF(Registry.invalidRequest);
