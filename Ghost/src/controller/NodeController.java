@@ -74,45 +74,51 @@ public class NodeController {
         if (position != -1 && position + 1 < max && position - 1 >= 0){
             //Predecessor
             predecessor = fingerTable.get(position - 1).getAddress();
-            fingerTable.get(position - 1).setPredecessor(fingerTable.get(position).getAddress());
-            node.setPredecessor(predecessor);
+//            fingerTable.get(position - 1).setPredecessor(fingerTable.get(position).getAddress());
+            fingerTable.get(position - 1).setPredecessor(node.getAddress());
+//            node.setPredecessor(predecessor);
             
             //Node
-            fingerTable.get(position).setPredecessor(fingerTable.get(position - 1).getAddress());
-            fingerTable.get(position).setSuccessor(fingerTable.get(position + 1).getAddress());            
+//            fingerTable.get(position).setPredecessor(fingerTable.get(position - 1).getAddress());
+//            fingerTable.get(position).setSuccessor(fingerTable.get(position + 1).getAddress());            
             
             //Successor
             successor = fingerTable.get(position + 1).getAddress();
-            fingerTable.get(position + 1).setSuccessor(fingerTable.get(position).getAddress());
-            node.setSuccessor(successor);
+//            fingerTable.get(position + 1).setSuccessor(fingerTable.get(position).getAddress());
+            fingerTable.get(position + 1).setSuccessor(node.getAddress());
+//            node.setSuccessor(successor);
         } else if (position + 1 < max) {
             //Predecessor
             predecessor = fingerTable.get(max - 1).getAddress();
-            fingerTable.get(max - 1).setPredecessor(fingerTable.get(position).getAddress());
-            node.setPredecessor(predecessor);
+//            fingerTable.get(max - 1).setPredecessor(fingerTable.get(position).getAddress());
+            fingerTable.get(max - 1).setPredecessor(node.getAddress());
+//            node.setPredecessor(predecessor);
             
             //Node            
-            fingerTable.get(position).setPredecessor(fingerTable.get(max - 1).getAddress());            
-            fingerTable.get(position).setSuccessor(fingerTable.get(position + 1).getAddress());
+//            fingerTable.get(position).setPredecessor(fingerTable.get(max - 1).getAddress());            
+//            fingerTable.get(position).setSuccessor(fingerTable.get(position + 1).getAddress());
             
             //Successor
             successor = fingerTable.get(position + 1).getAddress();
-            fingerTable.get(position + 1).setSuccessor(fingerTable.get(position).getAddress());
-            node.setSuccessor(successor);            
+//            fingerTable.get(position + 1).setSuccessor(fingerTable.get(position).getAddress());
+            fingerTable.get(position + 1).setSuccessor(node.getAddress());
+//            node.setSuccessor(successor);            
         } else if (position - 1 >= 0) {
             //Predecessor
             predecessor = fingerTable.get(position - 1).getAddress();
-            fingerTable.get(position - 1).setPredecessor(fingerTable.get(position).getAddress());
-            node.setPredecessor(predecessor);
+//            fingerTable.get(position - 1).setPredecessor(fingerTable.get(position).getAddress());
+            fingerTable.get(position - 1).setPredecessor(node.getAddress());
+//            node.setPredecessor(predecessor);
             
             //Node            
-            fingerTable.get(position).setPredecessor(fingerTable.get(position - 1).getAddress());            
-            fingerTable.get(position).setSuccessor(fingerTable.get(0).getAddress());            
+//            fingerTable.get(position).setPredecessor(fingerTable.get(position - 1).getAddress());            
+//            fingerTable.get(position).setSuccessor(fingerTable.get(0).getAddress());            
             
             //Successor
             successor = fingerTable.get(0).getAddress();
-            node.setSuccessor(successor);
-            fingerTable.get(0).setSuccessor(fingerTable.get(position).getAddress());            
+//            node.setSuccessor(successor);
+            fingerTable.get(0).setSuccessor(fingerTable.get(position).getAddress());
+            fingerTable.get(0).setSuccessor(node.getAddress());
         }                
     }
     

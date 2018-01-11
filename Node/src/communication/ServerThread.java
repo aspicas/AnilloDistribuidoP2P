@@ -40,11 +40,11 @@ public class ServerThread extends GlobalThread {
         }
     }
     
-    public void offerResource(){
+    public void offerResources(){
         
     }
     
-    public void answerResource(){
+    public void answerStatus(){
         
     }
     

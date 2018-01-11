@@ -57,22 +57,21 @@ public class MainNode {
                 line = scanner.nextLine();
                 System.out.println(line);
                 switch (line) {
-                    case ("RECURSOS_OFRECIDOS"):
-                        
+                    case Registry.offerResources:                        
                         break;
-                    case ("BUSCAR_RECURSO"):
-                        
+                    case Registry.searchResource:                        
                         break;
-                    case ("ESTADO_SOLICITUDES"):
+                    case Registry.requestStatus:
                         break;
-                    case ("ESTADO_RESPUESTAS"):
+                    case Registry.answerStatus:
                         break;
-                    case ("NUM_DESCARGAS"):
-                        
-                    case ("SALIR"):
+                    case (Registry.downloadNumberXVideo):
+                        break;
+                    case (Registry.exit):
                         //Proceso de salida del anillo
                         
                         System.exit(0);
+                        break;
                     default:
                         System.out.println("Comando invalido. Intentelo de nuevo.");
                         break;
