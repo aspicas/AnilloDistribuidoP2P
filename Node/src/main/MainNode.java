@@ -71,6 +71,7 @@ public class MainNode {
                         //Proceso de salida del anillo
                         
                         System.exit(0);
+                        break;
                     default:
                         System.out.println("Comando invalido. Intentelo de nuevo.");
                         break;
