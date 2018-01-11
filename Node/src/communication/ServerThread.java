@@ -149,6 +149,9 @@ public class ServerThread extends GlobalThread {
                     case Registry.deleteNode:
                         
                         break;
+                    case Registry.searchResource:
+                        
+                        break;
                     default:
                         System.out.println(Registry.invalidRequest);
                         output.writeUTF(Registry.invalidRequest);
@@ -168,8 +171,8 @@ public class ServerThread extends GlobalThread {
     
     @Override
     public void run() {
-        System.out.println("Defining request");
-        definingRequest();      
+        System.out.println("Defining request");        
+        definingRequest();
     }
     
 }

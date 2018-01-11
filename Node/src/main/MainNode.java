@@ -59,6 +59,7 @@ public class MainNode {
                 System.out.println(line);
                 switch (line) {
                     case Registry.offerResources:
+                        Registry.resourceController.showResourceList();
                         break;
                     case Registry.searchResource:
                         client.openCommunicationChannelToPredecessor();
