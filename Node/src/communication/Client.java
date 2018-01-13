@@ -142,8 +142,29 @@ public class Client {
             
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    public void deleteNodeInGhost(){
+        try {
+            String response = "";
+            
+            //establish connection
+            output.writeUTF(Registry.startCommunication);
+            response = input.readUTF();
+            System.out.println("response: " + response);
+            if (response.equals(Registry.startCommunication)) {
+                System.out.println("delete node in the ring");
+                output.writeUTF(Registry.deleteNode);
+                output.writeUTF(Registry.nodeController.nodeToJson());
+                response = input.readUTF();
+                System.out.println("response: " + response);
+            } else {
+                System.out.println(response);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     public void updateNodeRing(String command){
@@ -182,7 +203,7 @@ public class Client {
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
-                    } else {
+                    }else {
                         //End Communication
                         response = input.readUTF();
                         System.out.println("response: " + response);
@@ -197,6 +218,47 @@ public class Client {
         if (command.equals(Registry.changePredecessor)) {
             Registry.nodeController.showNode();
             Registry.resourceController.showResourceList();
+        }
+    }
+    
+    public void exitNodeInRing(String command){
+        try {
+            String response = "";
+            
+            //establish connection
+            output.writeUTF(Registry.startCommunication);
+            response = input.readUTF();
+            System.out.println("response: " + response);
+            if (response.equals(Registry.startCommunication)) {
+                output.writeUTF(command);
+                response = input.readUTF();
+                if (response.equals(Registry.changePredecessor)) {
+                    //Change Predeccessor
+                    System.out.println("predecessor: " + Registry.nodeController.getNode().getPredecessor());
+                    output.writeUTF(Registry.nodeController.getNode().getPredecessor());
+                    //Exchange of resources                        
+                    output.writeUTF(Registry.deleteNode);                    
+                    //End Communication
+                    response = input.readUTF();
+                    System.out.println("response: " + response);
+                } else if (response.equals(Registry.changeSuccessor)){
+                    //Change Predeccessor
+                    System.out.println("successor: " + Registry.nodeController.getNode().getSuccessor());
+                    output.writeUTF(Registry.nodeController.getNode().getSuccessor());
+                    //Exchange of resources
+                    output.writeUTF(Registry.deleteNode);
+                    output.writeUTF(Registry.resourceController.getExternalResources());
+                    //End Communication
+                    response = input.readUTF();
+                    System.out.println("response: " + response);
+                } else {
+                    System.out.println(Registry.invalidRequest);
+                }
+            } else {
+                System.out.println(Registry.invalidCommand);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

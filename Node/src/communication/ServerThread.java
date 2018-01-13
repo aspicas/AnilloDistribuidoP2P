@@ -120,6 +120,10 @@ public class ServerThread extends GlobalThread {
                             request = input.readUTF();
                             System.out.println("request: " + request);
                             Registry.resourceController.addExternalResources(request);
+                        } else if (request.equals(Registry.deleteNode)){
+                            request = input.readUTF();
+                            System.out.println("request: " + request);
+                            output.writeUTF(Registry.endCommunication);
                         } else {
                             output.writeUTF(Registry.invalidRequest);
                         }
@@ -138,6 +142,11 @@ public class ServerThread extends GlobalThread {
                         if (request.equals(Registry.getResources)) {
                             System.out.println(Registry.resourceController.getNodeResourceList());
                             output.writeUTF(Registry.resourceController.getNodeResourceList());
+                        } else if (request.equals(Registry.deleteNode)){
+                            request = input.readUTF();
+                            System.out.println("request: " + request);
+                            Registry.resourceController.deleteExternalResources();
+                            Registry.resourceController.addExternalResources(request);
                         } else {
                             System.out.println(Registry.invalidRequest);
                             output.writeUTF(Registry.invalidRequest);
@@ -145,12 +154,6 @@ public class ServerThread extends GlobalThread {
                         //End communication
                         System.out.println(Registry.endCommunication);
                         output.writeUTF(Registry.endCommunication);
-                        break;
-                    case Registry.deleteNode:
-                        
-                        break;
-                    case Registry.searchResource:
-                        
                         break;
                     default:
                         System.out.println(Registry.invalidRequest);

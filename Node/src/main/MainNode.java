@@ -77,12 +77,28 @@ public class MainNode {
                     case (Registry.downloadNumberXVideo):
                         break;
                     case (Registry.exit):
-                        //Proceso de salida del anillo
+                        //Exit proccess of the ring
+                        //Update ghost table
+                        client.openCommunicationChannelToGhost();
+                        client.deleteNodeInGhost();
+                        client.disconnet();
+                        
+                        if (!Registry.nodeController.getNode().getPredecessor().equals("")) {
+                            client.openCommunicationChannelToPredecessor();
+                            client.exitNodeInRing(Registry.changeSuccessor);
+                            client.disconnet();
+                        }
+                        
+                        if (!Registry.nodeController.getNode().getSuccessor().equals("")) {
+                            client.openCommunicationChannelToSuccessor();
+                            client.exitNodeInRing(Registry.changePredecessor);
+                            client.disconnet();
+                        }
                         
                         System.exit(0);
                         break;
                     default:
-                        System.out.println("Comando invalido. Intentelo de nuevo.");
+                        System.out.println(Registry.invalidCommand);
                         break;
                 }
             }

@@ -103,6 +103,17 @@ public class ResourceController {
         }
     }
     
+    public String getExternalResources(){
+        Gson gson = new Gson();
+        List<Resource> aux = new ArrayList<Resource>();
+        for (Resource resource: resourceList) {
+            if (!resource.getAddress().equals(Registry.nodeController.getNode().getAddress())){
+                aux.add(resource);
+            }
+        }
+        return gson.toJson(aux);
+    }
+    
     public void addExternalResources(String json){
         Gson gson = new Gson();
         List<Resource> aux = gson.fromJson(json, new TypeToken<List<Resource>>(){}.getType());        
