@@ -123,7 +123,8 @@ public class ServerThread extends GlobalThread {
                         } else if (request.equals(Registry.deleteNode)){
                             request = input.readUTF();
                             System.out.println("request: " + request);
-                            output.writeUTF(Registry.endCommunication);
+                            Registry.resourceController.deleteExternalResources();
+                            Registry.resourceController.addExternalResources(request);
                         } else {
                             output.writeUTF(Registry.invalidRequest);
                         }
@@ -143,10 +144,7 @@ public class ServerThread extends GlobalThread {
                             System.out.println(Registry.resourceController.getNodeResourceList());
                             output.writeUTF(Registry.resourceController.getNodeResourceList());
                         } else if (request.equals(Registry.deleteNode)){
-                            request = input.readUTF();
-                            System.out.println("request: " + request);
-                            Registry.resourceController.deleteExternalResources();
-                            Registry.resourceController.addExternalResources(request);
+                            System.out.println(Registry.deleteNode);
                         } else {
                             System.out.println(Registry.invalidRequest);
                             output.writeUTF(Registry.invalidRequest);
