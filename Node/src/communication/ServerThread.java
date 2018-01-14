@@ -124,7 +124,7 @@ public class ServerThread extends GlobalThread {
                             request = input.readUTF();
                             System.out.println("request: " + request);
                             Registry.resourceController.deleteExternalResources();
-                            Registry.resourceController.addExternalResources(request);
+                            Registry.resourceController.addExternalResources(request, Registry.nodeController.getNodeAddress());
                         } else {
                             output.writeUTF(Registry.invalidRequest);
                         }

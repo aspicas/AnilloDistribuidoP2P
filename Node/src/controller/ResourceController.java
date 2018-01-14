@@ -122,6 +122,16 @@ public class ResourceController {
         }
     }
     
+    public void addExternalResources(String json, String address){
+        Gson gson = new Gson();
+        List<Resource> aux = gson.fromJson(json, new TypeToken<List<Resource>>(){}.getType());        
+        for (Resource resource: aux) {
+            if (!resource.getAddress().equals(address)) {
+                this.resourceList.add(resource);
+            }            
+        }
+    }
+    
     public void showResourceList() {
         resourceView.showResourceList(resourceList);
     }

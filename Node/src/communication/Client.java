@@ -237,8 +237,8 @@ public class Client {
                     System.out.println("predecessor: " + Registry.nodeController.getNode().getPredecessor());
                     output.writeUTF(Registry.nodeController.getNode().getPredecessor());
                     //Exchange of resources                        
-                    output.writeUTF(Registry.deleteNode);
-                    output.writeUTF(Registry.resourceController.getExternalResources());
+                    output.writeUTF(Registry.deleteNode);                    
+                    output.writeUTF(Registry.resourceController.getExternalResources());                                        
                     //End Communication
                     response = input.readUTF();
                     System.out.println("response: " + response);
@@ -247,7 +247,7 @@ public class Client {
                     System.out.println("successor: " + Registry.nodeController.getNode().getSuccessor());
                     output.writeUTF(Registry.nodeController.getNode().getSuccessor());
                     //Exchange of resources
-                    output.writeUTF(Registry.deleteNode);                    
+                    output.writeUTF(Registry.deleteNode);
                     //End Communication
                     response = input.readUTF();
                     System.out.println("response: " + response);
