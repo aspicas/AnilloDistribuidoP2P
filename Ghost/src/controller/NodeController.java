@@ -10,6 +10,7 @@ import global.Registry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import model.Node;
 import view.NodeView;
 
@@ -126,8 +127,13 @@ public class NodeController {
         if (!node.getSuccessor().equals(node.getPredecessor())){
             fingerTable.get(position - 1).setSuccessor(node.getSuccessor());
             fingerTable.get(position + 1).setPredecessor(node.getPredecessor());
+        }      
+        Iterator itr = fingerTable.iterator();
+        while (itr.hasNext()){
+            if (((Node) itr.next()).getAddress().equals(node.getAddress())) {
+                itr.remove();
+            }
         }
-        fingerTable.remove(node);
         if (max == 2) {
             fingerTable.get(0).setPredecessor("");
             fingerTable.get(0).setSuccessor("");

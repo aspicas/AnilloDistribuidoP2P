@@ -35,11 +35,12 @@ public class ServerThread extends GlobalThread{
                     output.writeUTF(Registry.startCommunication);
                     request = super.input.readUTF();
                     System.out.println("request: " + request);
-                    if (Registry.deleteNode.equals(request)) {
+                    if (request.equals(Registry.deleteNode)) {
                         request = super.input.readUTF();
                         System.out.println("request: " + request);
                         Registry.nodeController.jsonToNode(request);
                         Registry.nodeController.deleteNode();
+                        Registry.nodeController.showFingerTable();
                         output.writeUTF(Registry.endCommunication);
                     } else {
                         Registry.nodeController.jsonToNode(request);

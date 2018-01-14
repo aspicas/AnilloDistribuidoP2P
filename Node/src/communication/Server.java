@@ -22,7 +22,7 @@ public class Server extends GlobalThread{
        
     public Server() {
         super();
-        try {                   
+        try {
             this.server = new ServerSocket(Registry.port);
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -34,7 +34,7 @@ public class Server extends GlobalThread{
     public void listen(){
         System.out.println("Listenning request");
         try {
-            while (true) {                
+            while (true) {
                 super.client = server.accept();
                 ((ServerThread) new ServerThread(super.client)).start();
             }
