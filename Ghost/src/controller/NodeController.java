@@ -121,17 +121,33 @@ public class NodeController {
     }
     
     public void deleteNode(){
-        int position = fingerTable.indexOf(node);
+        int position = 0;
         int max = fingerTable.toArray().length;
         
-        if (!node.getSuccessor().equals(node.getPredecessor())){
+        for (Node node: fingerTable){
+            if (node.getNodeId().equals(this.node.getNodeId())){
+                position = fingerTable.indexOf(node);
+            }
+        }
+        
+//        if (!node.getSuccessor().equals(node.getPredecessor())){
+//            fingerTable.get(position - 1).setSuccessor(node.getSuccessor());            
+//            fingerTable.get(position + 1).setPredecessor(node.getPredecessor());
+//        }
+        if (position != -1 && position + 1 < max && position - 1 >= 0){
             fingerTable.get(position - 1).setSuccessor(node.getSuccessor());
             fingerTable.get(position + 1).setPredecessor(node.getPredecessor());
-        }      
+        } else if (position + 1 < max) {
+            fingerTable.get(max - 1).setSuccessor(node.getSuccessor());
+            fingerTable.get(position + 1).setPredecessor(node.getPredecessor());
+        } else if (position - 1 >= 0) {
+            fingerTable.get(position - 1).setSuccessor(node.getSuccessor());
+            fingerTable.get(0).setPredecessor(node.getPredecessor());
+        }
         Iterator itr = fingerTable.iterator();
         while (itr.hasNext()){
             if (((Node) itr.next()).getAddress().equals(node.getAddress())) {
-                itr.remove();
+                itr.remove();               
             }
         }
         if (max == 2) {
