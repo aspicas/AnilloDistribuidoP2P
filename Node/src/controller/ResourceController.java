@@ -120,6 +120,10 @@ public class ResourceController {
         }
     }
     
+    public void deleteAllResources(){
+        resourceList.clear();
+    }
+    
     public String getExternalResources(){
         Gson gson = new Gson();
         List<Resource> aux = new ArrayList<Resource>();

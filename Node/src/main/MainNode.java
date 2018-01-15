@@ -72,9 +72,9 @@ public class MainNode {
                 switch (items.get(0)) {
                     case Registry.offerResources:
                         String resources = Registry.resourceController.getExternalResources();
-                        Registry.resourceController.deleteExternalResources();
+                        Registry.resourceController.deleteAllResources();
                         Registry.resourceController.getFileNamesFromDirectory();
-                        Registry.resourceController.addExternalResources(resources);
+                        Registry.resourceController.addExternalResources(resources);                        
                         Registry.resourceController.showResourceList();
                         break;
                     case Registry.searchResource:
