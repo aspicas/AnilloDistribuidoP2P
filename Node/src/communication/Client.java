@@ -26,7 +26,7 @@ import model.Resource; // VER
  *
  * @author david
  */
-public class Client {
+public class Client extends Thread{
     private Socket client = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;

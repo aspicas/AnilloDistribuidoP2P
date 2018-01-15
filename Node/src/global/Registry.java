@@ -20,7 +20,8 @@ public class Registry {
     //Communication
     public static final String ghost = "192.168.0.101";
     public static final int port = 2000;
-    public static final String address = "192.168.0.107";
+    public static final int downloadPort = 2001;
+    public static final String address = "192.168.1.106"; // 192.168.0.107
     
     //Controller
     public static NodeController nodeController = new NodeController(new Node(address), new NodeView());
@@ -41,6 +42,7 @@ public class Registry {
     public static final String offerResources = "RECURSOS_OFRECIDOS";
     public static final String answerStatus = "ESTADO_RESPUESTAS";
     public static final String downloadNumberXVideo = "NUM_DESCARGASXVIDEO";
+    public static final String downloadResource = "Download";
     public static final String exit = "EXIT";
     public static final String deleteNode = "Delete node";
     

@@ -8,6 +8,8 @@ package main;
 
 
 import communication.Client;
+import communication.Download;
+import communication.Load;
 import communication.Server;
 import controller.ResourceController;
 import global.Registry;
@@ -49,6 +51,9 @@ public class MainNode {
             client.disconnet();
         }
         
+        Download download = new Download();
+        download.start();
+        
         /* CLIENTE*/
         String line = "";
         Scanner scanner = new Scanner(System.in);        
@@ -69,6 +74,11 @@ public class MainNode {
                             System.out.println("¡Error buscando el recurso!");
                         }
                         client.disconnet();
+                        /*START DAVID*/
+                        Load load = new Load();
+                        load.receiveNewFile(Registry.nodeController.getNode().getSuccessor(), "lenguaje_C.pdf");
+                        System.out.println("Se ha iniciado la descarga.");
+                        /*END DAVID*/
                         break;
                     case Registry.requestStatus:
                         break;
