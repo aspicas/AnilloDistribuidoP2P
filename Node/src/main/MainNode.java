@@ -13,10 +13,15 @@ import communication.Load;
 import communication.Server;
 import controller.ResourceController;
 import global.Registry;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import jdk.nashorn.internal.parser.JSONParser;
 import model.Resource;
 import view.ResourceView;
 
@@ -66,27 +71,34 @@ public class MainNode {
                 List<String> items = Arrays.asList(line.split(" "));
                 switch (items.get(0)) {
                     case Registry.offerResources:
+                        String resources = Registry.resourceController.getExternalResources();
+                        Registry.resourceController.deleteExternalResources();
+                        Registry.resourceController.getFileNamesFromDirectory();
+                        Registry.resourceController.addExternalResources(resources);
                         Registry.resourceController.showResourceList();
                         break;
                     case Registry.searchResource:
                         //client.openCommunicationChannelToPredecessor();
                         try {
-                            client.searchResource(items.get(1));
+                            Resource resource = client.searchResource(items.get(1));
+                            if (resource != null) {
+                                /*START DAVID*/
+                                Load load = new Load();
+                                load.receiveNewFile(Registry.nodeController.getNode().getPredecessor(), items.get(1));
+                                System.out.println("Se ha iniciado la descarga.");
+                                /*END DAVID*/
+                            }
                         } catch (IOException e) {
                             System.out.println("¡Error buscando el recurso!");
                         }
-                        client.disconnet();
-                        /*START DAVID*/
-                        Load load = new Load();
-                        load.receiveNewFile(Registry.nodeController.getNode().getPredecessor(), items.get(1));
-                        System.out.println("Se ha iniciado la descarga.");
-                        /*END DAVID*/
+//                        client.disconnet();
                         break;
                     case Registry.requestStatus:
                         break;
                     case Registry.answerStatus:
                         break;
                     case (Registry.downloadNumberXVideo):
+                        System.out.println("Hasta la fecha se han descargado " + Registry.downloadNumber + " archivos.");
                         break;
                     case (Registry.exit):
                         //Exit proccess of the ring

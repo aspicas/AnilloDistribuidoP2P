@@ -63,9 +63,11 @@ public class LoadThread extends Thread{
 
 
     public void receiveFile () throws IOException {
+        
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
         System.out.println("Se comienza a recibir el archivo");
+        System.out.println(Registry.downloadPath);
         try {
             byte[] mybytearray = new byte[1024];
             InputStream is = socket.getInputStream();

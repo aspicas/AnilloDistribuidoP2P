@@ -42,7 +42,7 @@ public class Registry {
     public static final String requestStatus = "ESTADO_SOLICITUDES";
     public static final String offerResources = "RECURSOS_OFRECIDOS";
     public static final String answerStatus = "ESTADO_RESPUESTAS";
-    public static final String downloadNumberXVideo = "NUM_DESCARGASXVIDEO";
+    public static final String downloadNumberXVideo = "NUM_DESCARGAS";
     public static final String downloadResource = "Download";
     public static final String exit = "EXIT";
     public static final String deleteNode = "Delete node";
@@ -52,6 +52,11 @@ public class Registry {
     public static final String invalidCommand = "Invalid command";
     
     //Paths
-    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
-//    public static final String downloadPath = "/home/david/Downloads/";
+
+//    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
+    public static final String downloadPath = "/home/david/Downloads/";
+    
+    //Cantidad de descargas
+    public static int downloadNumber = 0;
+
 }
