@@ -34,6 +34,7 @@ public class Client extends Thread{
     public Client() {
         try {
             System.out.println("Ghost" + Registry.ghost);
+            System.out.println("Ghost" + Registry.ghost);
             this.client = new Socket(Registry.ghost, Registry.port);
             this.input = new DataInputStream(client.getInputStream());
             this.output = new DataOutputStream(client.getOutputStream());
@@ -151,8 +152,9 @@ public class Client extends Thread{
                     if (response.equals(Registry.changePredecessor)) { //Talking to successor
                         //Change Predeccessor
                         output.writeUTF(Registry.nodeController.getNode().getAddress());
-                        //Exchange of resources                        
-                        output.writeUTF(Registry.giveResources);                        
+                        //Exchange of resources
+                        output.writeUTF(Registry.giveResources);
+                        Registry.resourceController.showResourceList();
                         output.writeUTF(Registry.resourceController.getNodeResourceList());
                         //End Communication
                         response = input.readUTF();

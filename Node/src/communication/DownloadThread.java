@@ -48,7 +48,7 @@ public class DownloadThread extends Thread{
         }
     }
 
-    public void sendFile() throws IOException {
+    public void sendFile() throws IOException {        
         FileInputStream fis;
         BufferedInputStream bis = null;
         OutputStream os = new OutputStream() {
