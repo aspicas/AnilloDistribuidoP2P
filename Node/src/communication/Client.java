@@ -44,8 +44,8 @@ public class Client extends Thread{
         }
     }
     
-    public /*Resource*/ void searchResource(String resourceName) throws IOException {
-        Registry.resourceController.searchResource(resourceName);
+    public Resource searchResource(String resourceName) throws IOException {
+        return Registry.resourceController.searchResource(resourceName);
     }
     
     public void requestStatus(){

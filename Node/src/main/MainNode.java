@@ -79,7 +79,7 @@ public class MainNode {
                         client.disconnet();
                         /*START DAVID*/
                         Load load = new Load();
-                        load.receiveNewFile(Registry.nodeController.getNode().getSuccessor(), "lenguaje_C.pdf");
+                        load.receiveNewFile(Registry.nodeController.getNode().getSuccessor(), "little.txt");
                         System.out.println("Se ha iniciado la descarga.");
                         /*END DAVID*/
                         break;

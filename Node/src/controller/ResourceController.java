@@ -52,7 +52,7 @@ public class ResourceController {
         return output;
     }
     
-    public void /*Resource*/ searchResource(String resourceName) {
+    public Resource searchResource(String resourceName) {
         List<Resource> resourceList = new ArrayList<>();
         File directory = new File(Registry.downloadPath);
         File[] files = directory.listFiles();
@@ -60,12 +60,12 @@ public class ResourceController {
             resource = new Resource(getSHA1(f.getName()), f.getAbsolutePath(), f.getName());
             if(resource.getName().equals(resourceName)) {
                 System.out.println("Recurso encontrado: " + resource.getName());
-                //return resource;
+                return resource;
             }
             resourceList.add(resource);
         }
         System.out.println("Recurso no encontrado: " + resource.getName() + " != " + resourceName);
-        //return null;
+        return null;
     }
     
     public String getSHA1(String txt) {
