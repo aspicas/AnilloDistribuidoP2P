@@ -81,6 +81,7 @@ public class LoadThread extends Thread{
 
             bos.write(mybytearray, 0, current);
             bos.flush();
+            System.out.println("¡Archivo descargado satisfactoriamente!");
         }
         finally {
             if (fos != null) fos.close();
