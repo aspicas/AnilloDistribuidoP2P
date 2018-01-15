@@ -15,7 +15,7 @@ import view.NodeView;
  */
 public class Registry {
     //Communication
-    public static final String address = "192.168.1.100";
+    public static final String address = "192.168.0.107";
     public static final int port = 2000;
     
     //Encrypted

@@ -16,8 +16,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Resource; // VER
 
 /**
  *
@@ -41,45 +44,8 @@ public class Client {
         }
     }
     
-    public void searchResource() throws IOException {
-        int socketPort = Registry.port;
-        String server = Registry.nodeController.getNode().getPredecessor();
-        String fileToReceive = Registry.downloadPath + "coins_drop.mp3";
-        int fileSize = 99999999;
-        
-        int bytesRead;
-        int current = 0;
-        FileOutputStream fos = null;
-        BufferedOutputStream bos = null;
-        Socket sock = null;
-        
-        try {
-            sock = new Socket(server, socketPort);
-            System.out.println("Conectando...");
-
-            // receive file
-            byte [] mybytearray  = new byte [fileSize];
-            InputStream is = sock.getInputStream();
-            fos = new FileOutputStream(fileToReceive);
-            bos = new BufferedOutputStream(fos);
-            bytesRead = is.read(mybytearray,0,mybytearray.length);
-            current = bytesRead;
-
-            do {
-                bytesRead =
-                    is.read(mybytearray, current, (mybytearray.length-current));
-                if(bytesRead >= 0) current += bytesRead;
-            } while(bytesRead > -1);
-
-            bos.write(mybytearray, 0, current);
-            bos.flush();
-            System.out.println("Archivo " + fileToReceive
-                + " descargado (" + current + " bytes leidos)");
-        } finally {
-            if (fos != null) fos.close();
-            if (bos != null) bos.close();
-            if (sock != null) sock.close();
-        }
+    public /*Resource*/ void searchResource(String resourceName) throws IOException {
+        Registry.resourceController.searchResource(resourceName);
     }
     
     public void requestStatus(){

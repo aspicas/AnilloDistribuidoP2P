@@ -62,9 +62,9 @@ public class MainNode {
                         Registry.resourceController.showResourceList();
                         break;
                     case Registry.searchResource:
-                        client.openCommunicationChannelToPredecessor();
+                        //client.openCommunicationChannelToPredecessor();
                         try {
-                            client.searchResource();
+                            client.searchResource("coins_drop.mp3");
                         } catch (IOException e) {
                             System.out.println("¡Error buscando el recurso!");
                         }
