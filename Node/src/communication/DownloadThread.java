@@ -49,7 +49,8 @@ public class DownloadThread extends Thread{
         }
     }
 
-    public void sendFile() throws IOException {        
+    public void sendFile() throws IOException {    
+        System.out.println(Registry.downloadPath);
         FileInputStream fis;
         BufferedInputStream bis = null;
         OutputStream os = new OutputStream() {
