@@ -18,10 +18,10 @@ import view.ResourceView;
  */
 public class Registry {
     //Communication
-    public static final String ghost = "192.168.1.100";
+    public static final String ghost = "192.168.43.182";
     public static final int port = 2000;
     public static final int downloadPort = 2001;
-    public static final String address = "192.168.1.106";
+    public static final String address = "192.168.43.160";
     
     //Controller
     public static NodeController nodeController = new NodeController(new Node(address), new NodeView());

@@ -29,8 +29,7 @@ public class MainNode {
      */
     public static void main(String[] args) throws IOException {
         Registry.resourceController.getFileNamesFromDirectory();
-        System.out.println("Start server");
-        System.out.println("Start server");
+        System.out.println("Start server");        
         Server server = new Server();
         server.start();
         

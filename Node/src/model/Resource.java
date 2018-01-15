@@ -28,6 +28,7 @@ public class Resource {
         this.id = id;
         this.path = path;
         this.name = name;
+        System.out.println(Registry.address);
         this.address = Registry.address;
     }        
 
