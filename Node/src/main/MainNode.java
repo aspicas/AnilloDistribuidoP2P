@@ -81,7 +81,7 @@ public class MainNode {
                         //client.openCommunicationChannelToPredecessor();
                         try {
                             Resource resource = client.searchResource(items.get(1));
-                            if (resource != null) {
+                            if (resource == null) {
                                 /*START DAVID*/
                                 Load load = new Load();
                                 load.receiveNewFile(Registry.nodeController.getNode().getPredecessor(), items.get(1));
