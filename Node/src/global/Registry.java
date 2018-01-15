@@ -21,8 +21,8 @@ public class Registry {
     public static final String ghost = "192.168.43.182";
     public static final int port = 2000;
     public static final int downloadPort = 2001;
-    public static final String address = "192.168.43.61";
-    //public static final String address = "192.168.43.160";
+//    public static final String address = "192.168.43.61";
+    public static final String address = "192.168.43.160";
     
     //Controller
     public static NodeController nodeController = new NodeController(new Node(address), new NodeView());
@@ -52,6 +52,6 @@ public class Registry {
     public static final String invalidCommand = "Invalid command";
     
     //Paths
-    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
-    //public static final String downloadPath = "/home/david/Downloads/";
+//    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
+    public static final String downloadPath = "/home/david/Downloads/";
 }
