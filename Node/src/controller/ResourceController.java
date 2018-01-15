@@ -31,7 +31,8 @@ public class ResourceController {
         this.resourceView = resourceView;        
     }
     
-    public void getFileNamesFromDirectory() {        
+    public void getFileNamesFromDirectory() {
+        System.out.println(Registry.downloadPath);        
         File directory = new File(Registry.downloadPath);
         File[] files = directory.listFiles();
         for (File f:files) {            

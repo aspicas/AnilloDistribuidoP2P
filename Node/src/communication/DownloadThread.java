@@ -5,6 +5,7 @@
  */
 package communication;
 
+import global.Registry;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -59,7 +60,7 @@ public class DownloadThread extends Thread{
         };
 
         try {
-            File myFile = new File(home + "/Downloads/" + file);
+            File myFile = new File(Registry.downloadPath + file);
             byte[] mybytearray = new byte[(int) myFile.length()];
             fis = new FileInputStream(myFile);
             bis = new BufferedInputStream(fis);
