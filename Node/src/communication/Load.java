@@ -5,6 +5,7 @@
  */
 package communication;
 
+import global.Registry;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class Load extends Thread {
 
     public void receiveNewFile (String ip, String file) {
         try {
-            Socket socket = new Socket(ip, 3000);
+            Socket socket = new Socket(ip, Registry.downloadPort);
             ((LoadThread) new LoadThread(socket, file)).start();
         } catch (IOException e) {
             Logger.getLogger(Load.class.getName()).log(Level.SEVERE,null,e);
