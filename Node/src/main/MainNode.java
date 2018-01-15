@@ -78,7 +78,7 @@ public class MainNode {
                         client.disconnet();
                         /*START DAVID*/
                         Load load = new Load();
-                        load.receiveNewFile(Registry.nodeController.getNode().getSuccessor(), items.get(1));
+                        load.receiveNewFile(Registry.nodeController.getNode().getPredecessor(), items.get(1));
                         System.out.println("Se ha iniciado la descarga.");
                         /*END DAVID*/
                         break;
