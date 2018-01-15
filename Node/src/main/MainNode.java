@@ -63,7 +63,7 @@ public class MainNode {
                         break;
                     case Registry.searchResource:
                         client.openCommunicationChannelToPredecessor();
-                        
+                        client.searchResource(Registry.nodeController.getNode().getPredecessor(), "lenguaje_C.pdf");
                         client.disconnet();
                         break;
                     case Registry.requestStatus:
