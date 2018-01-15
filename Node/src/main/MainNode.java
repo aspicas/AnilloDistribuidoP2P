@@ -63,11 +63,7 @@ public class MainNode {
                         break;
                     case Registry.searchResource:
                         client.openCommunicationChannelToPredecessor();
-                        try {
-                            client.searchResource();
-                        } catch (IOException e) {
-                            System.out.println("¡Error buscando el recurso!");
-                        }
+                        
                         client.disconnet();
                         break;
                     case Registry.requestStatus:

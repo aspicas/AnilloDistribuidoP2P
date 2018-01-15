@@ -13,6 +13,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,7 +29,8 @@ import java.util.logging.Logger;
 public class ServerThread extends GlobalThread {
     
     private DataInputStream input;
-    private DataOutputStream output;    
+    private DataOutputStream output;
+    private String file = "";
     
     public ServerThread(Socket client) {
         super(client);
@@ -50,46 +52,30 @@ public class ServerThread extends GlobalThread {
         
     }
     
-    public void downloadNumberXVideo() throws IOException {
-//        int socketPort = Registry.port;
-        String fileToSend = Registry.downloadPath + "coins_drop.mp3";
-        
-        FileInputStream fis = null;
+    public void sendResource() throws FileNotFoundException, IOException {
+        FileInputStream fis;
         BufferedInputStream bis = null;
-        OutputStream os = null;
-//        ServerSocket servsock = null;
-//        Socket sock = null;
-        
-//        try {
-//            servsock = new ServerSocket(socketPort);
-//            while(true) {
-//                System.out.println("Esperando...");
-                try {
-//                    sock = servsock.accept();
-//                    System.out.println("Conexion aceptada: " + sock);
-                    // send file
-                    File myFile = new File (fileToSend);
-                    byte [] mybytearray  = new byte [(int)myFile.length()];
-                    fis = new FileInputStream(myFile);
-                    bis = new BufferedInputStream(fis);
-                    bis.read(mybytearray,0,mybytearray.length);
-//                    os = sock.getOutputStream();
-                    System.out.println("Enviando " + fileToSend + "(" + mybytearray.length + " bytes)");
-                    os.write(mybytearray,0,mybytearray.length);
-                    os.flush();
-                    System.out.println("Listo.");
-                }
-                finally {
-                    if (bis != null) bis.close();
-                    if (os != null) os.close();
-//                    if (sock !=null) sock.close();
-                }
-//            }
-//        }
-//        finally {
-//          if (servsock != null) servsock.close();
-//        }
-        
+        OutputStream os = new OutputStream() {
+            @Override
+            public void write(int i) throws IOException {
+
+            }
+        };
+
+        try {
+            File myFile = new File(Registry.downloadPath + file);
+            byte[] mybytearray = new byte[(int) myFile.length()];
+            fis = new FileInputStream(myFile);
+            bis = new BufferedInputStream(fis);
+            bis.read(mybytearray, 0, mybytearray.length);
+            os = super.client.getOutputStream();
+            os.write(mybytearray, 0, mybytearray.length);
+            os.flush();
+        }
+        finally {
+            if (bis != null) bis.close();
+            if (os != null) os.close();
+        }
     }
     
     public void definingRequest(){
@@ -152,6 +138,12 @@ public class ServerThread extends GlobalThread {
                         //End communication
                         System.out.println(Registry.endCommunication);
                         output.writeUTF(Registry.endCommunication);
+                        break;
+                    case Registry.downloadResource:
+                        request = input.readUTF();
+                        System.out.println("request: " + request);
+                        this.file = request;
+                        sendResource();
                         break;
                     default:
                         System.out.println(Registry.invalidRequest);

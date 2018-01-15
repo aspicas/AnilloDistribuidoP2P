@@ -23,10 +23,11 @@ import java.util.logging.Logger;
  *
  * @author david
  */
-public class Client {
+public class Client extends Thread{
     private Socket client = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
+    private String file = "";
 
     public Client() {
         try {
@@ -41,44 +42,22 @@ public class Client {
         }
     }
     
-    public void searchResource() throws IOException {
-        int socketPort = Registry.port;
-        String server = Registry.nodeController.getNode().getPredecessor();
-        String fileToReceive = Registry.downloadPath + "coins_drop.mp3";
-        int fileSize = 99999999;
-        
-        int bytesRead;
-        int current = 0;
-        FileOutputStream fos = null;
-        BufferedOutputStream bos = null;
-        Socket sock = null;
-        
+    public void searchResource(String ip, String file){
         try {
-            sock = new Socket(server, socketPort);
-            System.out.println("Conectando...");
-
-            // receive file
-            byte [] mybytearray  = new byte [fileSize];
-            InputStream is = sock.getInputStream();
-            fos = new FileOutputStream(fileToReceive);
-            bos = new BufferedOutputStream(fos);
-            bytesRead = is.read(mybytearray,0,mybytearray.length);
-            current = bytesRead;
-
-            do {
-                bytesRead =
-                    is.read(mybytearray, current, (mybytearray.length-current));
-                if(bytesRead >= 0) current += bytesRead;
-            } while(bytesRead > -1);
-
-            bos.write(mybytearray, 0, current);
-            bos.flush();
-            System.out.println("Archivo " + fileToReceive
-                + " descargado (" + current + " bytes leidos)");
-        } finally {
-            if (fos != null) fos.close();
-            if (bos != null) bos.close();
-            if (sock != null) sock.close();
+            String response;
+            this.file = file;
+            output.writeUTF(Registry.startCommunication);
+            response = input.readUTF();
+            System.out.println("response: " + response);
+            if (response.equals(Registry.startCommunication)) {
+                output.writeUTF(Registry.downloadResource);
+                output.writeUTF(this.file);
+            } else {
+                System.out.println(Registry.invalidCommand);
+            }            
+            receiveResource(ip);
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -260,6 +239,16 @@ public class Client {
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void receiveResource(String ip){        
+        try {
+            Socket socket = new Socket(ip, 3000);
+            ((ClientThread) new ClientThread(socket, file)).start();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void disconnet(){
