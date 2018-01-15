@@ -14,6 +14,8 @@ import communication.Server;
 import controller.ResourceController;
 import global.Registry;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import model.Resource;
 import view.ResourceView;
@@ -61,14 +63,24 @@ public class MainNode {
                 System.out.print("$ ");
                 line = scanner.nextLine();
                 System.out.println(line);
-                switch (line) {
+                List<String> items = Arrays.asList(line.split(" "));
+                switch (items.get(0)) {
                     case Registry.offerResources:
                         Registry.resourceController.showResourceList();
                         break;
                     case Registry.searchResource:
+                        //client.openCommunicationChannelToPredecessor();
+                        try {
+                            client.searchResource(items.get(1));
+                        } catch (IOException e) {
+                            System.out.println("¡Error buscando el recurso!");
+                        }
+                        client.disconnet();
+                        /*START DAVID*/
                         Load load = new Load();
                         load.receiveNewFile(Registry.nodeController.getNode().getSuccessor(), "lenguaje_C.pdf");
                         System.out.println("Se ha iniciado la descarga.");
+                        /*END DAVID*/
                         break;
                     case Registry.requestStatus:
                         break;

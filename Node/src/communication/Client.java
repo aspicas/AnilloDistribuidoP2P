@@ -16,8 +16,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Resource; // VER
 
 /**
  *
@@ -40,6 +43,10 @@ public class Client extends Thread{
         }  catch (Exception ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public /*Resource*/ void searchResource(String resourceName) throws IOException {
+        Registry.resourceController.searchResource(resourceName);
     }
     
     public void requestStatus(){
