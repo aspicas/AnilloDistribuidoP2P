@@ -5,6 +5,7 @@
  */
 package communication;
 
+import global.Registry;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -68,7 +69,7 @@ public class LoadThread extends Thread{
         try {
             byte[] mybytearray = new byte[1024];
             InputStream is = socket.getInputStream();
-            fos = new FileOutputStream(this.home + "/Downloads/" + this.file);
+            fos = new FileOutputStream(Registry.downloadPath + this.file);
             bos = new BufferedOutputStream(fos);
             int bytesRead = is.read(mybytearray, 0, mybytearray.length);
             int current = bytesRead;
@@ -78,7 +79,7 @@ public class LoadThread extends Thread{
                 if (bytesRead >= 0) current += bytesRead;
             } while (bytesRead > -1);
 
-            bos.write(mybytearray, 0, bytesRead);
+            bos.write(mybytearray, 0, current);
             bos.flush();
         }
         finally {

@@ -52,6 +52,6 @@ public class Registry {
     public static final String invalidCommand = "Invalid command";
     
     //Paths
-    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/"; 
+    public static final String downloadPath = "/home/jesus/Downloads/NetBeans_Downloads/";
     //public static final String downloadPath = "/home/david/Downloads/";
 }
