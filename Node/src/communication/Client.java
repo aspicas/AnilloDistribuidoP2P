@@ -27,7 +27,6 @@ public class Client extends Thread{
     private Socket client = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
-    private String file = "";
 
     public Client() {
         try {
@@ -38,25 +37,6 @@ public class Client extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }  catch (Exception ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void searchResource(String ip, String file){
-        try {
-            String response;
-            this.file = file;
-            output.writeUTF(Registry.startCommunication);
-            response = input.readUTF();
-            System.out.println("response: " + response);
-            if (response.equals(Registry.startCommunication)) {
-                output.writeUTF(Registry.downloadResource);
-                output.writeUTF(this.file);
-            } else {
-                System.out.println(Registry.invalidCommand);
-            }            
-            receiveResource(ip);
-        } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -239,16 +219,6 @@ public class Client extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void receiveResource(String ip){        
-        try {
-            Socket socket = new Socket(ip, 3000);
-            ((ClientThread) new ClientThread(socket, file)).start();
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
     }
     
     public void disconnet(){

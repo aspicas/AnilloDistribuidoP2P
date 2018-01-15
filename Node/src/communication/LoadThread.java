@@ -5,7 +5,6 @@
  */
 package communication;
 
-import global.Registry;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -20,21 +19,33 @@ import java.util.logging.Logger;
  *
  * @author david
  */
-public class ClientThread extends Thread {
-    private Socket client = null;
-    private DataInputStream input;
-    private DataOutputStream output;
-    private String file = "";
+public class LoadThread extends Thread{
+    public Socket socket;
+    public DataInputStream input;
+    public DataOutputStream output;
+    public String file;
+    public String home;
 
-    public ClientThread(Socket client, String file) {
-        this.client = client;
+    public LoadThread (Socket socket, String file)
+    {
+        this.home = System.getProperty("user.home");
+        System.out.println("Se creo el hilo de recepcion");
         this.file = file;
+        this.socket = socket;
         try {
-            input = new DataInputStream(client.getInputStream());
-            output = new DataOutputStream(client.getOutputStream());
+            input = new DataInputStream(socket.getInputStream());
+            output = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException ex){
+            Logger.getLogger(LoadThread.class.getName()).log(Level.SEVERE,null,ex);
         }
-        catch (IOException ex){
-            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE,null,ex);
+    }
+
+    public void desconectar(){
+        try {
+            socket.close();
+        }
+        catch (IOException ex) {
+            Logger.getLogger(LoadThread.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
 
@@ -42,21 +53,22 @@ public class ClientThread extends Thread {
         try {
             System.out.println("Se solicita el archivo: " + file);
             output.writeUTF(file);
-            receiveResource();            
+            receiveFile();
         }
         catch (IOException ex){
-            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoadThread.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void receiveResource () throws IOException {
+        }
+
+
+    public void receiveFile () throws IOException {
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
         System.out.println("Se comienza a recibir el archivo");
         try {
             byte[] mybytearray = new byte[1024];
-            InputStream is = client.getInputStream();
-            fos = new FileOutputStream(Registry.downloadPath + this.file);
+            InputStream is = socket.getInputStream();
+            fos = new FileOutputStream(this.home + "/Downloads/" + this.file);
             bos = new BufferedOutputStream(fos);
             int bytesRead = is.read(mybytearray, 0, mybytearray.length);
             int current = bytesRead;
@@ -72,23 +84,14 @@ public class ClientThread extends Thread {
         finally {
             if (fos != null) fos.close();
             if (bos != null) bos.close();
-            if (client != null) client.close();
+            if (socket != null) socket.close();
         }
     }
 
-    public void desconectar(){        
-        try {
-            client.close();
-        } catch (IOException ex) {
-            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
     @Override
-    public void run() {
+    public void run(){
+        System.out.println("Comienza a correr el hilo");
         requestFile(file);
+        desconectar();
     }
-    
-    
 }
