@@ -10,7 +10,7 @@ import model.Node;
 import view.NodeView;
 
 /**
- *
+ * Clase con parametros generales de la aplicacion
  * @author david
  */
 public class Registry {

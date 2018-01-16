@@ -13,15 +13,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase encargada de responder las peticiones del cliente.
  * @author david
  */
 public class ServerThread extends GlobalThread{
 
+    /**
+     * Constructor de la clase
+     * @param client Cliente con el que se entablara la conexion
+     */
     public ServerThread(Socket client) {
         super(client);
     }
     
+    /**
+     * Metodo que define la entrada y salida de los nodos en el anillo
+     * @throws IOException
+     */
     public void defineRing(){
         System.out.println("Start defining ring");
         try {
@@ -64,6 +72,10 @@ public class ServerThread extends GlobalThread{
         }
     }
 
+    /**
+     * Metodo heredado del GlobalThread que corre el hilo el puerto
+     * de escucha en segundo plano.
+     */
     @Override
     public void run() {
         System.out.println("Define ring action");

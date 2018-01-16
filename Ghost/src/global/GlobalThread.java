@@ -16,7 +16,7 @@ import communication.ServerThread;
 import java.net.ServerSocket;
 
 /**
- *
+ * Clase abstracta para el manejo general de los hilos
  * @author david
  */
 public abstract class GlobalThread extends Thread{
@@ -24,12 +24,19 @@ public abstract class GlobalThread extends Thread{
     protected DataInputStream input;
     protected DataOutputStream output;
 
+    /**
+     * Constructor vacio de la clase
+     */
     public GlobalThread() {
         this.client = null;
         this.input = null;
         this.output = null;
     } 
     
+    /**
+     * Constructor que inicializa el cliente de la clase
+     * @param client cliente que realiza la peticion
+     */
     public GlobalThread(Socket client) {
         try {
             this.client = client;
@@ -40,6 +47,9 @@ public abstract class GlobalThread extends Thread{
         }
     } 
     
+    /**
+     * Metodo que desconecta al cliente del socket
+     */
     public void disconnet(){
         try{
             this.client.close();
@@ -50,6 +60,10 @@ public abstract class GlobalThread extends Thread{
         }
     }
     
+    /**
+     * Metodo abstracto heredado de la Clase Thread para sobreescribirlo
+     * @see Thread
+     */
     @Override
     public abstract void run();
 }

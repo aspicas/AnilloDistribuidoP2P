@@ -9,11 +9,18 @@ import java.util.ArrayList;
 import model.Node;
 
 /**
- *
+ * Vista que muestra los valores del nodo
  * @author david
  */
 public class NodeView {
     
+    /**
+     * Muestra los valores del nodo
+     * @param id Id del nodo
+     * @param address Direccion ip
+     * @param successor Sucessor del nodo
+     * @param predecessor Predecesor del nodo
+     */
     public void showNode(String id, String address, String successor, String predecessor) {
         System.out.println("Node");
         System.out.println("id: " + id);
@@ -22,6 +29,10 @@ public class NodeView {
         System.out.println("predecessor: " + predecessor);
     }
     
+    /**
+     * Muestra los valores de la tabla finger
+     * @param fingerTable Lista con los valores de la tabla finger
+     */
     public void showFingerTable(ArrayList<Node> fingerTable){
         for (Node node: fingerTable){
             System.out.println("Node: {id: "+ node.getNodeId() +", "

@@ -16,13 +16,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase encargada de manejar el puerto de escucha del servidor
  * @author david
  */
 public class Server extends GlobalThread {    
     
     private ServerSocket server = null;
     
+    /**
+     * Constructor de la clase
+     */
     public Server() {
         super();        
         try {
@@ -37,6 +40,12 @@ public class Server extends GlobalThread {
         }
     }
     
+    /**
+     * Metodo encargado de escuchar las peticiones de los clientes.
+     * @throws IOException
+     * @throws Exception
+     * @see GlobalThread
+     */
     public void listen(){
         System.out.println("Listenning request");
         try {            
@@ -51,6 +60,10 @@ public class Server extends GlobalThread {
         }
     }
 
+    /**
+     * Metodo heredado del GlobalThread que corre el hilo el puerto
+     * de escucha en segundo plano.
+     */
     @Override
     public void run() {
         System.out.println("Starting ghost server");

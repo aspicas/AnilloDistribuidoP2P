@@ -11,11 +11,15 @@ import java.net.Socket;
 import communication.Server;
 
 /**
- *
+ * Clase principal
  * @author david
  */
 public class MainGhost {
 
+    /**
+     * Metodo principal
+     * @param args 
+     */
     public static void main(String args[]) {
         System.out.println("Start");
         Server server = new Server();

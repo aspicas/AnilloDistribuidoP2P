@@ -15,7 +15,7 @@ import model.Node;
 import view.NodeView;
 
 /**
- *
+ * Clase que controla el look and feel del nodo
  * @author david
  */
 public class NodeController {
@@ -23,16 +23,30 @@ public class NodeController {
     private NodeView nodeView = null;
     private ArrayList<Node> fingerTable = new ArrayList<Node>();
 
+    /**
+     * Constructor de la clase que inicializa el nodo y la vista
+     * @param node Nodo que entra en el anillo
+     * @param nodeView Vista del nodo
+     */
     public NodeController(Node node, NodeView nodeView) {
         this.node = node;
         this.node.setNodeId(getSHA1(node.getAddress()));
         this.nodeView = nodeView;
     }
     
+    /**
+     * Metodo que te da la direccion del nodo
+     * @return
+     */
     public String getNodeAddress(){
         return node.getAddress();
     }
     
+    /**
+     * Metodo que calcula el SHA-1 de un texto
+     * @param txt Texto al que se le calculara el SHA-1
+     * @return
+     */
     public String getSHA1(String txt) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest
@@ -50,22 +64,37 @@ public class NodeController {
         return null;
     }
     
+    /**
+     * Metodo que convierte un nodo en un Json
+     * @see Node
+     * @return 
+     */
     public String nodeToJson(){
         Gson gson = new Gson();
         return gson.toJson(node);
     }
     
+    /**
+     * Metodo que convierte un Json en una instancia de Node
+     * @param json 
+     */
     public void jsonToNode(String json){
         Gson gson = new Gson();
         this.node = gson.fromJson(json, Node.class);
     }
     
+    /**
+     * Metodo que agrega un nodo a la tabla finger en orden descendente
+     */
     public void addNodeToFingerTable(){
         fingerTable.add(node);
         Collections.sort(fingerTable);
         setNodeSuccessorAndPredecessor();
     }
     
+    /**
+     * Metodo que estable el sucesor y el predecesor de la tabla finger
+     */
     public void setNodeSuccessorAndPredecessor(){
         int position = fingerTable.indexOf(node);
         int max = fingerTable.toArray().length;
@@ -120,6 +149,9 @@ public class NodeController {
         }
     }
     
+    /**
+     * Metodo que borra un nodo
+     */
     public void deleteNode(){
         int position = 0;
         int max = fingerTable.toArray().length;
@@ -156,10 +188,16 @@ public class NodeController {
         }
     }
     
+    /**
+     * Metodo que muestra el nodo actual
+     */
     public void showNode(){
         nodeView.showNode(node.getNodeId(), node.getAddress(), node.getSuccessor(), node.getPredecessor());
     }
     
+    /**
+     * Metodo que muestra la tabla finger
+     */
     public void showFingerTable(){
         nodeView.showFingerTable(this.fingerTable);
     }

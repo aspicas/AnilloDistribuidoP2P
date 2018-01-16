@@ -6,8 +6,10 @@
 package model;
 
 /**
- *
+ * Clase modelo para implementar los nodos
+ * Implementa un Comparable para ordenar sus valores en una lista
  * @author david
+ * @see Comparable
  */
 public class Node implements Comparable{
     
@@ -16,6 +18,9 @@ public class Node implements Comparable{
     private String successor;
     private String predecessor;
 
+    /**
+     * Constructor vacio de la clase
+     */
     public Node() {
         this.nodeId = "";
         this.address = "";
@@ -23,10 +28,21 @@ public class Node implements Comparable{
         this.predecessor = "";
     }
 
+    /**
+     * Contructor que inicializa el nodo con una direccion ip
+     * @param address Direccion ip
+     */
     public Node(String address) {
         this.address = address;
     }
 
+    /**
+     * Constructor que inicializa todos los valores del nodo
+     * @param nodeId Id unico del nodo
+     * @param address Direccion ip
+     * @param successor Sucesor del nodo
+     * @param predecessor Predecesor del nodo
+     */
     public Node(String nodeId, String address, String successor, String predecessor) {
         this.nodeId = nodeId;
         this.address = address;
@@ -66,6 +82,11 @@ public class Node implements Comparable{
         this.predecessor = predecessor;
     }   
 
+    /**
+     * Metodo para comparar nodos entre si
+     * @param o Objeto de tipo Node
+     * @return 
+     */
     @Override
     public int compareTo(Object o) {
         String compareId=((Node) o).getNodeId();
