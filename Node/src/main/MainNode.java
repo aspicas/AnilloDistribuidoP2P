@@ -26,12 +26,13 @@ import model.Resource;
 import view.ResourceView;
 
 /**
- *
+ * Clase principal 
  * @author david
  */
 public class MainNode {
 
     /**
+     * Metodo principal que inicializa la aplicacion
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {        

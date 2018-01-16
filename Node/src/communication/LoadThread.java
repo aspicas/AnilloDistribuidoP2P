@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que maneja la peticion del recurso al nodo servidor
  * @author david
  */
 public class LoadThread extends Thread{
@@ -27,6 +27,11 @@ public class LoadThread extends Thread{
     public String file;
     public String home;
 
+    /**
+     * Constructor vacio de la clase
+     * @param socket Socket que mantendra la peticion
+     * @param file Archivo a descargar
+     */
     public LoadThread (Socket socket, String file)
     {
         this.home = System.getProperty("user.home");
@@ -41,6 +46,9 @@ public class LoadThread extends Thread{
         }
     }
 
+    /**
+     * Desconexion del socket
+     */
     public void desconectar(){
         try {
             socket.close();
@@ -50,6 +58,10 @@ public class LoadThread extends Thread{
         }
     }
 
+    /**
+     * Solicitar un archivo para descargarlo
+     * @param file Archivo a descargar
+     */
     public void requestFile(String file){
         try {
             System.out.println("Se solicita el archivo: " + file);
@@ -62,8 +74,11 @@ public class LoadThread extends Thread{
         }
 
 
-    public void receiveFile () throws IOException {
-        
+    /**
+     * Recibe el recurso que consulta del servidor
+     * @throws IOException 
+     */
+    public void receiveFile () throws IOException {        
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
         System.out.println("Se comienza a recibir el archivo");
@@ -92,6 +107,9 @@ public class LoadThread extends Thread{
         }
     }
 
+    /**
+     * Metodo heredado de Thread que corre en segundo plano
+     */
     @Override
     public void run(){
         System.out.println("Comienza a correr el hilo");

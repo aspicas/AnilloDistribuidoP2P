@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase encargada de responder las peticiones del cliente.
  * @author david
  */
 public class ServerThread extends GlobalThread {
@@ -32,6 +32,10 @@ public class ServerThread extends GlobalThread {
     private DataOutputStream output;
     private String file = "";
     
+    /**
+     * Constructor de la clase
+     * @param client Cliente con el que se entablara la conexion
+     */
     public ServerThread(Socket client) {
         super(client);
         try {
@@ -44,40 +48,9 @@ public class ServerThread extends GlobalThread {
         }
     }
     
-    public void offerResources(){
-        
-    }
-    
-    public void answerStatus(){
-        
-    }
-    
-    public void sendResource() throws FileNotFoundException, IOException {
-        FileInputStream fis;
-        BufferedInputStream bis = null;
-        OutputStream os = new OutputStream() {
-            @Override
-            public void write(int i) throws IOException {
-
-            }
-        };
-
-        try {
-            File myFile = new File(Registry.downloadPath + file);
-            byte[] mybytearray = new byte[(int) myFile.length()];
-            fis = new FileInputStream(myFile);
-            bis = new BufferedInputStream(fis);
-            bis.read(mybytearray, 0, mybytearray.length);
-            os = super.client.getOutputStream();
-            os.write(mybytearray, 0, mybytearray.length);
-            os.flush();
-        }
-        finally {
-            if (bis != null) bis.close();
-            if (os != null) os.close();
-        }
-    }
-    
+    /**
+     * Metodo que define las peticiones de otros nodos.
+     */
     public void definingRequest(){
         System.out.println("Start defining request");        
         try {
@@ -139,12 +112,6 @@ public class ServerThread extends GlobalThread {
                         System.out.println(Registry.endCommunication);
                         output.writeUTF(Registry.endCommunication);
                         break;
-                    case Registry.downloadResource:
-                        request = input.readUTF();
-                        System.out.println("request: " + request);
-                        this.file = request;
-                        sendResource();
-                        break;
                     default:
                         System.out.println(Registry.invalidRequest);
                         output.writeUTF(Registry.invalidRequest);
@@ -162,6 +129,10 @@ public class ServerThread extends GlobalThread {
         }
     }
     
+    /**
+     * Metodo heredado del GlobalThread que corre el hilo el puerto
+     * de escucha en segundo plano.
+     */
     @Override
     public void run() {
         System.out.println("Defining request");        

@@ -13,20 +13,30 @@ import communication.Server;
 import communication.ServerThread;
 
 /**
- *
+ * Clase abstracta global para manejar los hilos en el nodo
  * @author david
  */
 public abstract class GlobalThread extends Thread{
     protected Socket client;
 
+    /**
+     * Constructor vacio de la clase
+     */
     public GlobalThread() {
         this.client = null;
     }
     
+    /**
+     * Constructor que inicializa el cliente
+     * @param client Cliente socket
+     */
     public GlobalThread(Socket client) {
         this.client = client;
     }
     
+    /**
+     * Cerrar el socket del cliente
+     */
     public void disconnet(){
         try{
             this.client.close();
@@ -37,6 +47,10 @@ public abstract class GlobalThread extends Thread{
         }
     }
     
+    /**
+     * Metodo heredado de la clase Thread
+     * @see Thread
+     */
     @Override
     public abstract void run();
 }

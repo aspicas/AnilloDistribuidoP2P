@@ -12,14 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase encargada de pedir los recursos en segundo plano
  * @author david
  */
 public class Load extends Thread {
     public Load() {
 
     }
-
+    
+    /**
+     * Peticion de recursos que corre en segundo plano
+     * @param ip Direccion del servidor al que le hara la peticion
+     * @param file Recurso que pide
+     */
     public void receiveNewFile (String ip, String file) {
         try {
             Socket socket = new Socket(ip, Registry.downloadPort);
@@ -31,6 +36,9 @@ public class Load extends Thread {
         }
     }
 
+    /**
+     * Metodo sobreescrito de Thread
+     */
     @Override
     public void run() {
     }

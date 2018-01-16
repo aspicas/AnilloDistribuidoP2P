@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase encargada de mantener activo el puerto de escucha encargado de las descargas
  * @author david
  */
 public class Download extends Thread {

@@ -8,7 +8,7 @@ package model;
 import global.Registry;
 
 /**
- *
+ * Clase que lleva el Recurso
  * @author jesus
  */
 public class Resource {
@@ -17,6 +17,9 @@ public class Resource {
     private String name;
     private String address;
     
+    /**
+     * Constructor vacio de la clase
+     */
     public Resource() {
         this.id = "";
         this.name = "";
@@ -24,6 +27,12 @@ public class Resource {
         this.address = Registry.address;
     }
 
+    /**
+     * Constructor que inicializa los atributos de la clase
+     * @param id Id unico del recurso
+     * @param path Camino absoluto del recurso
+     * @param name Nombre del recurso
+     */
     public Resource(String id, String path, String name) {
         this.id = id;
         this.path = path;

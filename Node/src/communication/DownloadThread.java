@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que se encarga de manejar las peticiones de descarga de recursos
  * @author david
  */
 public class DownloadThread extends Thread{
@@ -28,6 +28,10 @@ public class DownloadThread extends Thread{
     public String file;
     public String home;
 
+    /**
+     * Constructor vacio de la clase
+     * @param socket 
+     */
     public DownloadThread (Socket socket) {
         this.home = System.getProperty("user.home");
         this.socket = socket;
@@ -40,6 +44,9 @@ public class DownloadThread extends Thread{
         }
     }
 
+    /**
+     * Desconexion del nodo
+     */
     public void desconectar(){
         try {
             socket.close();
@@ -49,7 +56,10 @@ public class DownloadThread extends Thread{
         }
     }
 
-
+    /**
+     * Metodo encargado de enviar el archivo solicitado y de llevar el numero de descargas
+     * @throws IOException 
+     */
     public void sendFile() throws IOException {    
         System.out.println(Registry.downloadPath);
         System.out.println(Registry.downloadPath);
@@ -79,6 +89,9 @@ public class DownloadThread extends Thread{
         }
     }
 
+    /**
+     * Metodo encargado de correr el nodo en segundo plano
+     */
     @Override
     public void run(){
         try {

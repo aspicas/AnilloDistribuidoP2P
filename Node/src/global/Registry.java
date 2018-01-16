@@ -13,7 +13,7 @@ import view.NodeView;
 import view.ResourceView;
 
 /**
- *
+ * Clase que contiene la informacion que utilizara el nodo
  * @author david
  */
 public class Registry {

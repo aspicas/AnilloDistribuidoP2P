@@ -23,14 +23,18 @@ import java.util.logging.Logger;
 import model.Resource; // VER
 
 /**
- *
+ * Clase encargada de hacer una peticion a otro nodo
  * @author david
+ * @see Thread
  */
 public class Client extends Thread{
     private Socket client = null;
     private DataInputStream input = null;
     private DataOutputStream output = null;
 
+    /**
+     * Constructor vacio de la clase
+     */
     public Client() {
         try {
             System.out.println("Ghost" + Registry.ghost);
@@ -45,15 +49,20 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Metodo que busca el recurso por nombre
+     * @param resourceName Nombre del recurso
+     * @return
+     * @throws IOException 
+     */
     public Resource searchResource(String resourceName) throws IOException {
         return Registry.resourceController.searchResource(resourceName);
     }
     
-    public void requestStatus(){
-
-    }
-    
-        
+    /**
+     * Metodo que abre un canal de comunicacion con el sucesor
+     * @throws IOException
+     */
     public void openCommunicationChannelToSuccessor(){
         try {            
             this.client = new Socket(Registry.nodeController.getNode().getSuccessor(), Registry.port);
@@ -64,6 +73,10 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Metodo que abre un canal de comunicacion con el predecesor
+     * @throws IOException
+     */
     public void openCommunicationChannelToPredecessor(){
         try {            
             this.client = new Socket(Registry.nodeController.getNode().getPredecessor(), Registry.port);
@@ -74,6 +87,10 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Metodo que abre un canal de comunicacion con el nodo fantasma
+     * @throws IOException
+     */
     public void openCommunicationChannelToGhost(){
         try {            
             this.client = new Socket(Registry.ghost, Registry.port);
@@ -84,6 +101,10 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Metodo que busca su sucesor y predecesor en el fantasma
+     * @throws IOException
+     */
     public void defineGhostRing(){
         try {
             String response = "";
@@ -112,6 +133,10 @@ public class Client extends Thread{
         }        
     }
     
+    /**
+     * Metodo encargado de la salida del nodo en el lado del fantasma
+     * @throws IOException
+     */
     public void deleteNodeInGhost(){
         try {
             String response = "";
@@ -134,6 +159,11 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Metodo que actualiza el los sucesores y predecesores del nodo con sus respectivos recursos
+     * @param command 
+     * @throws IOException
+     */
     public void updateNodeRing(String command){
         try {
             String response = "";
@@ -189,6 +219,11 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Salida del nodo del anillo
+     * @param command 
+     * @throws IOException
+     */
     public void exitNodeInRing(String command){
         try {
             String response = "";
@@ -230,6 +265,11 @@ public class Client extends Thread{
         }
     }
     
+    /**
+     * Desconexion del cliente con el nodo servidor
+     * @exception Exception
+     * @exception IOException
+     */
     public void disconnet(){
         try {
             this.client.close();

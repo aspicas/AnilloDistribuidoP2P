@@ -18,7 +18,7 @@ import global.Registry;
 import java.util.Iterator;
 
 /**
- *
+ * Clase que controla los recursos del nodo
  * @author jesus
  */
 public class ResourceController {
@@ -26,11 +26,20 @@ public class ResourceController {
     private ResourceView resourceView = null;
     private List<Resource> resourceList = new ArrayList<>();
     
+    /**
+     * Constructor que inicializa el recurso y la vista
+     * @param resource Recurso
+     * @param resourceView Vista
+     */
     public ResourceController(Resource resource, ResourceView resourceView) {
         this.resource = resource;        
         this.resourceView = resourceView;        
     }
     
+    /**
+     * Busca los archivos en el directorio Registry.downloadPath
+     * @see Registry
+     */
     public void getFileNamesFromDirectory() { 
         System.out.println(Registry.downloadPath);
         File directory = new File(Registry.downloadPath);
@@ -41,6 +50,10 @@ public class ResourceController {
         }
     }
     
+    /**
+     * Metodo que devuelve en JSON la lista de recursos del nodo
+     * @return 
+     */
     public String getNodeResourceList() {
         List<Resource> resourceList = new ArrayList<>();
         File directory = new File(Registry.downloadPath);
@@ -53,6 +66,11 @@ public class ResourceController {
         return output;
     }
     
+    /**
+     * Metodo que buscara un recurso especifico por nombre
+     * @param resourceName Nombre del recurso
+     * @return 
+     */
     public Resource searchResource(String resourceName) {
         List<Resource> resourceList = new ArrayList<>();
         File directory = new File(Registry.downloadPath);
@@ -69,6 +87,11 @@ public class ResourceController {
         return null;
     }
     
+    /**
+     * Metodo que encripta en SHA1 un texto
+     * @param txt Texto a encriptar
+     * @return 
+     */
     public String getSHA1(String txt) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest
@@ -86,31 +109,55 @@ public class ResourceController {
         return null;
     }
     
+    /**
+     * Convierte un recurso a JSON
+     * @return 
+     */
     public String resourceToJson(){
         Gson gson = new Gson();
         return gson.toJson(resource);
     }
     
+    /**
+     * Convierte un JSON string a una instancia de recurso
+     * @param json 
+     */
     public void jsonToResource(String json){
         Gson gson = new Gson();
         this.resource = gson.fromJson(json, Resource.class);
     }
     
+    /**
+     * Convierte la lista de recursos en un JSON
+     * @return 
+     */
     public String resourceListToJson(){
         Gson gson = new Gson();
         return gson.toJson(resourceList);
     }
     
+    /**
+     * Convierte una lista de recursos especifica en un JSON
+     * @param resourceList Lista de recursos externa
+     * @return 
+     */
     public String resourceListToJson(List<Resource> resourceList){
         Gson gson = new Gson();
         return gson.toJson(resourceList);
     }
     
+    /**
+     * Convierte un JSON string en una lista de recursos
+     * @param json String JSON
+     */
     public void jsonToResourceList(String json){
         Gson gson = new Gson();
         this.resourceList = gson.fromJson(json, new TypeToken<List<Resource>>(){}.getType());
     }
     
+    /**
+     * Borrar todo los recursos externos al nodo
+     */
     public void deleteExternalResources(){
         Iterator itr = resourceList.iterator();
         while (itr.hasNext()){
@@ -120,10 +167,17 @@ public class ResourceController {
         }
     }
     
+    /**
+     * Borra todos los recursos
+     */
     public void deleteAllResources(){
         resourceList.clear();
     }
     
+    /**
+     * Obtiene un String de la lista de recursos externos al nodo
+     * @return 
+     */
     public String getExternalResources(){
         Gson gson = new Gson();
         List<Resource> aux = new ArrayList<Resource>();
@@ -135,6 +189,10 @@ public class ResourceController {
         return gson.toJson(aux);
     }
     
+    /**
+     * Agrega recursos externos a traves de JSON
+     * @param json JSON string
+     */
     public void addExternalResources(String json){
         Gson gson = new Gson();
         List<Resource> aux = gson.fromJson(json, new TypeToken<List<Resource>>(){}.getType());        
@@ -143,6 +201,11 @@ public class ResourceController {
         }
     }
     
+    /**
+     * Agrega recursos externos en un JSON diferentes a una direccion ip especificada
+     * @param json String JSON
+     * @param address Direccion ip que no guardara
+     */
     public void addExternalResources(String json, String address){
         Gson gson = new Gson();
         List<Resource> aux = gson.fromJson(json, new TypeToken<List<Resource>>(){}.getType());        
@@ -153,6 +216,9 @@ public class ResourceController {
         }
     }
     
+    /**
+     * Muestra las lista de recursos
+     */
     public void showResourceList() {
         resourceView.showResourceList(resourceList);
     }
